@@ -3,42 +3,43 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { withBase } from '@/lib/paths';
 
 const base = import.meta.env.BASE_URL;
 
 const modules = [
   {
-    href: `${base}scorecard`,
+    href: withBase(base, '/scorecard'),
     tag: 'Модуль 1',
     title: 'AI-Resistance Scorecard',
     text: 'Оцени навыки по шкале «насколько ИИ это заменит» и узнай, что качать первым.',
   },
   {
-    href: `${base}cases`,
+    href: withBase(base, '/cases'),
     tag: 'Модуль 2',
     title: 'Сложные кейсы',
     text: 'Реальные ситуации с работы. AI-наставник задаёт неудобные вопросы — без воды.',
   },
   {
-    href: `${base}workflows`,
+    href: withBase(base, '/workflows'),
     tag: 'Модуль 3',
     title: 'AI-Augmented Workflows',
     text: 'Учись ставить задачи ИИ правильно: находи ошибки в генерации и улучшай результат.',
   },
   {
-    href: `${base}domain`,
+    href: withBase(base, '/domain'),
     tag: 'Модуль 4',
     title: 'Доменная экспертиза',
     text: '115-ФЗ, PCI DSS, ЦБ, legacy. То, что ИИ знает поверхностно — а ты должен глубоко.',
   },
   {
-    href: `${base}soft-skills`,
+    href: withBase(base, '/soft-skills'),
     tag: 'Модуль 5',
     title: 'Переговоры и soft skills',
     text: 'Симуляции со сложными стейкхолдерами. Ищи win-win, а не «согласовали как есть».',
   },
   {
-    href: `${base}journal`,
+    href: withBase(base, '/journal'),
     tag: 'Модуль 6',
     title: 'Рефлексия',
     text: 'Еженедельный журнал: что узнал, где ошибся, как ИИ мог помочь — и где мешал.',
@@ -73,7 +74,7 @@ const modules = [
 
       <div class="flex flex-wrap gap-3">
         <Button asChild size="lg" class="font-bold uppercase tracking-wide">
-          <a href={`${base}scorecard`}>Я в деле — начнём!</a>
+          <a href={withBase(base, '/scorecard')}>Я в деле — начнём!</a>
         </Button>
         <Button
           asChild
@@ -81,7 +82,7 @@ const modules = [
           variant="outline"
           class="border-primary font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
         >
-          <a href={`${base}settings`}>Подключить AI-наставника</a>
+          <a href={withBase(base, '/settings')}>Подключить AI-наставника</a>
         </Button>
       </div>
     </div>

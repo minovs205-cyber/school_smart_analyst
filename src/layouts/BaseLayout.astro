@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import { AppShell, type NavItem } from '@/components/layout/AppShell';
+import { withBase } from '@/lib/paths';
 
 interface Props {
   title: string;
@@ -30,7 +31,7 @@ const navItems: NavItem[] = [
 <html lang="ru" class="dark">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+    <link rel="icon" type="image/svg+xml" href={withBase(baseUrl, '/favicon.svg')} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />

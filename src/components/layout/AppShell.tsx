@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { NavLink } from '@/components/layout/NavLink';
 import { Separator } from '@/components/ui/separator';
+import { withBase } from '@/lib/paths';
 
 export interface NavItem {
   href: string;
@@ -17,12 +18,6 @@ interface AppShellProps {
   title?: string;
 }
 
-function joinBase(baseUrl: string, path: string): string {
-  const base = baseUrl.replace(/\/+$/, '') || '';
-  const normalized = path.startsWith('/') ? path : `/${path}`;
-  return `${base}${normalized}` || '/';
-}
-
 export function AppShell({
   baseUrl,
   currentPath,
@@ -32,13 +27,13 @@ export function AppShell({
   const [open, setOpen] = useState(false);
   const resolvedItems = items.map((item) => ({
     ...item,
-    href: joinBase(baseUrl, item.href),
+    href: withBase(baseUrl, item.href),
   }));
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/80 bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4">
-        <a href={joinBase(baseUrl, '/')} className="flex shrink-0 items-center gap-2">
+        <a href={withBase(baseUrl, '/')} className="flex shrink-0 items-center gap-2">
           <span className="inline-flex size-8 items-center justify-center rounded-lg bg-primary text-sm font-black text-primary-foreground">
             AR
           </span>
@@ -53,7 +48,7 @@ export function AppShell({
 
         <div className="ml-auto flex items-center gap-2 lg:ml-3">
           <Button asChild size="sm" className="hidden sm:inline-flex font-semibold uppercase tracking-wide">
-            <a href={joinBase(baseUrl, '/scorecard')}>Начать</a>
+            <a href={withBase(baseUrl, '/scorecard')}>Начать</a>
           </Button>
 
           <div className="lg:hidden">
