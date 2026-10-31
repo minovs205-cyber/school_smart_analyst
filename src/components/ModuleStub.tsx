@@ -40,7 +40,7 @@ export function ModuleStub({ title, step, description, bullets, settingsHref }: 
             variant="outline"
             className="border-primary font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
           >
-            <a href={settingsHref}>Настроить AI-наставника</a>
+            <a href={settingsHref}>Настроить ИИ-наставника</a>
           </Button>
         </CardContent>
       </Card>

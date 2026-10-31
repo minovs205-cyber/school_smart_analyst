@@ -22,7 +22,7 @@ export function AppShell({
   baseUrl,
   currentPath,
   items,
-  title = 'AI-Resistance',
+  title = 'Антихрупкий SA',
 }: AppShellProps) {
   const [open, setOpen] = useState(false);
   const resolvedItems = items.map((item) => ({

@@ -6,113 +6,95 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { withBase } from '@/lib/paths';
 
 const base = import.meta.env.BASE_URL;
-
-const modules = [
-  {
-    href: withBase(base, '/scorecard'),
-    tag: 'Модуль 1',
-    title: 'AI-Resistance Scorecard',
-    text: 'Оцени навыки по шкале «насколько ИИ это заменит» и узнай, что качать первым.',
-  },
-  {
-    href: withBase(base, '/cases'),
-    tag: 'Модуль 2',
-    title: 'Сложные кейсы',
-    text: 'Реальные ситуации с работы. AI-наставник задаёт неудобные вопросы — без воды.',
-  },
-  {
-    href: withBase(base, '/workflows'),
-    tag: 'Модуль 3',
-    title: 'AI-Augmented Workflows',
-    text: 'Учись ставить задачи ИИ правильно: находи ошибки в генерации и улучшай результат.',
-  },
-  {
-    href: withBase(base, '/domain'),
-    tag: 'Модуль 4',
-    title: 'Доменная экспертиза',
-    text: '115-ФЗ, PCI DSS, ЦБ, legacy. То, что ИИ знает поверхностно — а ты должен глубоко.',
-  },
-  {
-    href: withBase(base, '/soft-skills'),
-    tag: 'Модуль 5',
-    title: 'Переговоры и soft skills',
-    text: 'Симуляции со сложными стейкхолдерами. Ищи win-win, а не «согласовали как есть».',
-  },
-  {
-    href: withBase(base, '/journal'),
-    tag: 'Модуль 6',
-    title: 'Рефлексия',
-    text: 'Еженедельный журнал: что узнал, где ошибся, как ИИ мог помочь — и где мешал.',
-  },
-];
 ---
 
 <BaseLayout title="Главная">
-  <section class="relative space-y-10">
+  <section class="space-y-10">
     <div class="space-y-5">
       <div class="flex flex-wrap gap-2">
         <Badge class="border border-primary/40 bg-transparent text-primary uppercase tracking-wider">
-          Системный анализ
+          Личный тренажёр
         </Badge>
         <Badge class="border border-accent/50 bg-transparent text-accent uppercase tracking-wider">
-          Устойчивость к ИИ
+          SA в банке
         </Badge>
-        <Badge variant="secondary" class="uppercase tracking-wider">Банкинг · $0</Badge>
       </div>
 
       <h1 class="max-w-3xl text-4xl font-bold leading-tight tracking-tight md:text-5xl">
-        Здесь ты прокачаешь аналитика,<br class="hidden sm:block" />
-        <span class="text-primary">которого ИИ не заменит</span>
+        Прокачай то, что <span class="text-primary">ИИ не заменит</span>
       </h1>
 
       <p class="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-        Не важно, сколько лет в банке и насколько ИИ уже пишет user stories. Системный анализ — это
-        навык: переговоры, неопределённость, архитектура и домен. Считай эту платформу своим
-        тренажёром антихрупкости. Тренируйся в своём темпе. Кодить ТЗ за тебя ИИ может — думать за
-        стейкхолдеров нет. Просто начни.
+        Не шесть «курсов ради курсов» — один путь на сегодня: оцени навыки, разбери кейс с наставником,
+        зафиксируй урок недели. Остальное — по мере привычки.
       </p>
-
-      <div class="flex flex-wrap gap-3">
-        <Button asChild size="lg" class="font-bold uppercase tracking-wide">
-          <a href={withBase(base, '/scorecard')}>Я в деле — начнём!</a>
-        </Button>
-        <Button
-          asChild
-          size="lg"
-          variant="outline"
-          class="border-primary font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
-        >
-          <a href={withBase(base, '/settings')}>Подключить AI-наставника</a>
-        </Button>
-      </div>
     </div>
 
     <div class="space-y-4">
-      <h2 class="text-xl font-semibold tracking-tight md:text-2xl">
-        Что тебя ждёт на платформе
-      </h2>
-      <p class="max-w-2xl text-sm text-muted-foreground md:text-base">
-        Шесть модулей под навыки, которые сложно автоматизировать. Без рутины, которую ИИ уже делает
-        лучше.
-      </p>
+      <h2 class="text-xl font-semibold tracking-tight md:text-2xl">Путь на сегодня</h2>
+      <div class="grid gap-4 md:grid-cols-3">
+        <Card class="border-primary/40 bg-card/80">
+          <CardHeader>
+            <Badge class="w-fit bg-primary text-primary-foreground">Шаг 1</Badge>
+            <CardTitle class="text-base">Карта навыков</CardTitle>
+            <CardDescription>
+              12 банковских SA-навыков, радар и топ-3 «что качать». Без ИИ — быстро и честно.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button asChild class="font-semibold">
+              <a href={withBase(base, '/scorecard')}>Открыть карту</a>
+            </Button>
+          </CardContent>
+        </Card>
 
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          modules.map((mod) => (
-            <a href={mod.href} class="group block">
-              <Card class="h-full border-border bg-card/80 transition-colors group-hover:border-primary/60">
-                <CardHeader class="space-y-2">
-                  <Badge class="w-fit border-0 bg-accent/20 text-accent">{mod.tag}</Badge>
-                  <CardTitle class="text-base group-hover:text-primary">{mod.title}</CardTitle>
-                  <CardDescription class="text-muted-foreground">{mod.text}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <span class="text-sm font-semibold text-primary">Перейти →</span>
-                </CardContent>
-              </Card>
-            </a>
-          ))
-        }
+        <Card class="border-border bg-card/80">
+          <CardHeader>
+            <Badge class="w-fit border-0 bg-accent/20 text-accent">Шаг 2</Badge>
+            <CardTitle class="text-base">Кейс + ИИ-наставник</CardTitle>
+            <CardDescription>
+              Реальная ситуация из банка. Наставник задаёт неудобные вопросы через OpenRouter.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button asChild variant="outline" class="border-primary font-semibold text-primary">
+              <a href={withBase(base, '/cases')}>К кейсам</a>
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card class="border-border bg-card/80">
+          <CardHeader>
+            <Badge variant="secondary" class="w-fit">Шаг 3</Badge>
+            <CardTitle class="text-base">Журнал недели</CardTitle>
+            <CardDescription>
+              Три поля: что узнал, где ошибся, роль ИИ. Привычка важнее идеального текста.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button asChild variant="outline">
+              <a href={withBase(base, '/journal')}>Записать неделю</a>
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+
+    <div class="space-y-3">
+      <h2 class="text-lg font-semibold">Позже — когда путь войдёт в привычку</h2>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <a class="rounded-full border border-border px-3 py-1 text-muted-foreground hover:border-primary hover:text-primary" href={withBase(base, '/workflows')}>
+          Сценарии с ИИ
+        </a>
+        <a class="rounded-full border border-border px-3 py-1 text-muted-foreground hover:border-primary hover:text-primary" href={withBase(base, '/domain')}>
+          Домен
+        </a>
+        <a class="rounded-full border border-border px-3 py-1 text-muted-foreground hover:border-primary hover:text-primary" href={withBase(base, '/soft-skills')}>
+          Переговоры
+        </a>
+        <a class="rounded-full border border-border px-3 py-1 text-muted-foreground hover:border-primary hover:text-primary" href={withBase(base, '/settings')}>
+          Настройки ключа
+        </a>
       </div>
     </div>
   </section>

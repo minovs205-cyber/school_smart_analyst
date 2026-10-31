@@ -1,22 +1,22 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { ModuleStub } from '@/components/ModuleStub';
-
 import { withBase } from '@/lib/paths';
+
 const settingsHref = withBase(import.meta.env.BASE_URL, '/settings');
 ---
 
 <BaseLayout title="Переговоры" description="Симуляции переговоров со стейкхолдерами.">
   <ModuleStub
     client:load
-    title="Переговоры и soft skills"
-    step="Шаг 6 · скоро"
-    description="Сложный стейкхолдер не читает твой Confluence. Здесь ты тренируешь диалог: ИИ играет роль оппонента с характером и позицией. Цель — win-win, не «согласовали молчанием»."
+    title="Переговоры"
+    step="Позже · в очереди"
+    description="Симуляция оппонента (CISO, спонсор, владелец продукта) будет отдельным чатом. Сейчас тренируй жёсткие вопросы через ИИ-наставника в кейсах."
     bullets={[
-      'Чат-симуляция со стейкхолдером',
-      'Разбор конфликтов и поиск win-win',
-      'Шаблоны рефлексии после разговора',
-      'История диалога сохраняется локально',
+      'Чат со стейкхолдером с характером',
+      'Разбор конфликтов и win-win',
+      'Шаблоны рефлексии',
+      'История диалога локально',
     ]}
     settingsHref={settingsHref}
   />

@@ -1,21 +1,21 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { ModuleStub } from '@/components/ModuleStub';
-
 import { withBase } from '@/lib/paths';
+
 const settingsHref = withBase(import.meta.env.BASE_URL, '/settings');
 ---
 
-<BaseLayout title="Workflows" description="Тренажёр работы аналитика с ИИ.">
+<BaseLayout title="Сценарии с ИИ" description="Тренажёр работы аналитика с ИИ.">
   <ModuleStub
     client:load
-    title="AI-Augmented Workflows"
-    step="Шаг 4 · скоро"
-    description="ИИ — твой джун, не замена. Здесь ты учишься ставить задачи так, чтобы результат был полезен: находишь ошибки в сгенерированных требованиях и сравниваешь решения."
+    title="Сценарии с ИИ"
+    step="Позже · в очереди"
+    description="Сначала закрой путь «карта → кейс → журнал». Этот модуль — промпты аналитика, поиск ошибок в генерации и сравнение решений — подключим следующим."
     bullets={[
-      'Промпты для аналитика — готовые шаблоны',
-      'Тренажёр: твой промпт → ответ ИИ → твоя оценка',
-      'Кейсы «найди 5 ошибок в генерации»',
+      'Шаблоны промптов для SA',
+      'Тренажёр: твой промпт → ответ модели → оценка',
+      'Кейсы «найди ошибки в генерации»',
       'Сравнение: ты vs ИИ vs эталон',
     ]}
     settingsHref={settingsHref}

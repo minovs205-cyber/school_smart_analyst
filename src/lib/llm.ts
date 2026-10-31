@@ -53,7 +53,7 @@ export async function chatCompletion(options: ChatOptions): Promise<string> {
       Authorization: `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
       'HTTP-Referer': 'https://minovs205-cyber.github.io/school_smart_analyst/',
-      'X-Title': 'AI-Resistance Analyst',
+      'X-Title': 'Антихрупкий аналитик',
     },
     body: JSON.stringify({
       model,

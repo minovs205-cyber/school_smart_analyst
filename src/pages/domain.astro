@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { ModuleStub } from '@/components/ModuleStub';
-
 import { withBase } from '@/lib/paths';
+
 const settingsHref = withBase(import.meta.env.BASE_URL, '/settings');
 ---
 
@@ -10,13 +10,13 @@ const settingsHref = withBase(import.meta.env.BASE_URL, '/settings');
   <ModuleStub
     client:load
     title="Доменная экспертиза"
-    step="Шаг 5 · скоро"
-    description="ИИ перескажет PCI DSS за минуту. Ты должен понимать, почему легаси-шлюз в банке ломает красивую схему на проде. Здесь — глубина, а не поверхностный пересказ."
+    step="Позже · в очереди"
+    description="Пока домен качается через кейсы (115-ФЗ, legacy-платежи). Отдельная библиотека материалов по ЦБ и PCI — следующим этапом."
     bullets={[
-      'Кейсы по 115-ФЗ, PCI DSS, требованиям ЦБ',
-      'Интеграции с legacy-системами',
-      'Поиск и фильтры по темам регуляторики',
-      'Контент в Markdown — правишь сам, без кода',
+      'Материалы по 115-ФЗ, PCI DSS, требованиям ЦБ',
+      'Интеграции с legacy',
+      'Поиск по темам',
+      'Контент в Markdown',
     ]}
     settingsHref={settingsHref}
   />

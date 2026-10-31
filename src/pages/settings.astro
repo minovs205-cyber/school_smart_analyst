@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 ---
 
-<BaseLayout title="Настройки" description="Подключи AI-наставника и проверь деплой.">
+<BaseLayout title="Настройки" description="Ключ ИИ-наставника и деплой.">
   <div class="space-y-6">
     <div class="space-y-3">
       <Badge class="border border-primary/40 bg-transparent text-primary uppercase tracking-wider">
@@ -13,16 +13,16 @@ import { Badge } from '@/components/ui/badge';
       </Badge>
       <h1 class="text-3xl font-bold tracking-tight md:text-4xl">Настройки</h1>
       <p class="max-w-2xl text-muted-foreground">
-        Платформа только для тебя. Прогресс и ключ живут в браузере — без подписок и без бэкенда.
-        Подключи наставника один раз и возвращайся к прокачке.
+        ИИ-наставник на странице кейса вызывает OpenRouter напрямую из браузера. Без ключа кнопка
+        «Начать разбор» покажет подсказку — это не поломка модели, а отсутствие ключа или лимитов.
       </p>
     </div>
 
     <Card class="border-border bg-card/80">
       <CardHeader>
-        <CardTitle>AI-наставник (OpenRouter)</CardTitle>
+        <CardTitle>Ключ OpenRouter</CardTitle>
         <CardDescription>
-          Ключ берёшь на{" "}
+          Создай на{" "}
           <a
             class="text-primary underline underline-offset-4"
             href="https://openrouter.ai/keys"
@@ -31,7 +31,7 @@ import { Badge } from '@/components/ui/badge';
           >
             openrouter.ai/keys
           </a>
-          . Для модулей — модели с суффиксом{" "}
+          . Для наставника бери модели с{" "}
           <code class="rounded bg-muted px-1 py-0.5 text-xs text-accent">:free</code>.
         </CardDescription>
       </CardHeader>
@@ -42,23 +42,10 @@ import { Badge } from '@/components/ui/badge';
 
     <Card class="border-border bg-card/80">
       <CardHeader>
-        <CardTitle>Где живёт сайт</CardTitle>
+        <CardTitle>Почему наставник «молчал»</CardTitle>
         <CardDescription>
-          Репозиторий{" "}
-          <a
-            class="text-primary underline underline-offset-4"
-            href="https://github.com/minovs205-cyber/school_smart_analyst"
-            target="_blank"
-            rel="noreferrer"
-          >
-            minovs205-cyber/school_smart_analyst
-          </a>
-          . После push на{" "}
-          <code class="rounded bg-muted px-1 py-0.5 text-xs">main</code> GitHub Actions собирает
-          Pages. Адрес:{" "}
-          <code class="rounded bg-muted px-1 py-0.5 text-xs">
-            https://minovs205-cyber.github.io/school_smart_analyst/
-          </code>
+          До этого релиза UI не вызывал API — были только заглушки модулей. Сейчас на кейсе есть
+          реальный чат. Если ошибка 401/429 — проверь ключ и лимиты free-модели.
         </CardDescription>
       </CardHeader>
     </Card>

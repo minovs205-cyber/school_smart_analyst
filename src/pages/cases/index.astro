@@ -1,23 +1,46 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { ModuleStub } from '@/components/ModuleStub';
-
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CASES } from '@/data/cases';
 import { withBase } from '@/lib/paths';
-const settingsHref = withBase(import.meta.env.BASE_URL, '/settings');
+
+const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="Кейсы" description="Сложные рабочие кейсы и AI-наставник.">
-  <ModuleStub
-    client:load
-    title="Сложные кейсы"
-    step="Шаг 3 · скоро"
-    description="Не учебные «напиши user story». Реальные ситуации с работы — анонимно, по делу. AI-наставник будет давить неудобными вопросами, пока ты не разберёшь корень проблемы."
-    bullets={[
-      'Библиотека кейсов в Markdown',
-      'Фильтры: тип, сложность, домен',
-      'AI-наставник через OpenRouter',
-      'Личные заметки по кейсу в браузере',
-    ]}
-    settingsHref={settingsHref}
-  />
+<BaseLayout title="Кейсы" description="Сложные банковские кейсы и ИИ-наставник.">
+  <div class="space-y-6">
+    <div class="space-y-3">
+      <Badge class="border border-primary/40 bg-transparent text-primary uppercase tracking-wider">
+        Модуль · Кейсы
+      </Badge>
+      <h1 class="text-3xl font-bold tracking-tight md:text-4xl">Сложные кейсы</h1>
+      <p class="max-w-2xl text-muted-foreground">
+        Анонимизированные ситуации «как на работе». Открой кейс и запусти ИИ-наставника — он будет
+        давить вопросами, а не писать за тебя ТЗ.
+      </p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      {
+        CASES.map((c) => (
+          <a href={withBase(base, `/cases/${c.slug}`)} class="group block">
+            <Card class="h-full border-border bg-card/80 transition-colors group-hover:border-primary/60">
+              <CardHeader class="space-y-2">
+                <div class="flex flex-wrap gap-2">
+                  <Badge class="border-0 bg-accent/20 text-accent">{c.difficulty}</Badge>
+                  <Badge variant="secondary">{c.domain}</Badge>
+                </div>
+                <CardTitle class="text-base group-hover:text-primary">{c.title}</CardTitle>
+                <CardDescription>{c.summary}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <span class="text-sm font-semibold text-primary">Разбирать →</span>
+              </CardContent>
+            </Card>
+          </a>
+        ))
+      }
+    </div>
+  </div>
 </BaseLayout>
