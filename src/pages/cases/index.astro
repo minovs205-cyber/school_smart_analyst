@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ModuleStub } from '@/components/ModuleStub';
+
+const settingsHref = `${import.meta.env.BASE_URL}settings`;
+---
+
+<BaseLayout title="Кейсы" description="Библиотека сложных кейсов и AI-наставник.">
+  <ModuleStub
+    client:load
+    title="Сложные кейсы"
+    step="Шаг 3"
+    description="Markdown-кейсы из реальной работы, фильтры по тегам и AI-наставник через OpenRouter."
+    bullets={[
+      'Astro Content Collections для Markdown',
+      'Список с фильтрами: тип, сложность, домен',
+      'Страница кейса + AI-наставник',
+      'Заметки по кейсам в localStorage',
+    ]}
+    settingsHref={settingsHref}
+  />
+</BaseLayout>

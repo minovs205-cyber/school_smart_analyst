@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ModuleStub } from '@/components/ModuleStub';
+
+const settingsHref = `${import.meta.env.BASE_URL}settings`;
+---
+
+<BaseLayout title="Журнал" description="Еженедельная рефлексия и анализ паттернов.">
+  <ModuleStub
+    client:load
+    title="Рефлексия и извлечение уроков"
+    step="Шаг 7"
+    description="Еженедельный журнал: что узнал, где ошибся, как ИИ мог бы помочь — плюс AI-анализ паттернов."
+    bullets={[
+      'Форма еженедельного журнала',
+      'Хранение journal_entries в localStorage',
+      'AI-анализ записей через OpenRouter',
+      'Визуализация прогресса во времени',
+    ]}
+    settingsHref={settingsHref}
+  />
+</BaseLayout>

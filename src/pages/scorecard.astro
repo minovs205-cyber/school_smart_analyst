@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ModuleStub } from '@/components/ModuleStub';
+
+const settingsHref = `${import.meta.env.BASE_URL}settings`;
+---
+
+<BaseLayout title="Scorecard" description="Трекер навыков и AI-resistance score.">
+  <ModuleStub
+    client:load
+    title="AI-Resistance Scorecard"
+    step="Шаг 2"
+    description="Трекер навыков с оценкой «насколько ИИ это заменит», radar chart и персональные рекомендации."
+    bullets={[
+      'Форма оценки: название, уровень 1–10, AI-resistance 1–10',
+      'Radar chart / heatmap (Recharts)',
+      'Сохранение в localStorage (skills_score)',
+      'Рекомендации: что качать в первую очередь',
+    ]}
+    settingsHref={settingsHref}
+  />
+</BaseLayout>

@@ -1,0 +1,42 @@
+---
+import '@/styles/global.css';
+import { AppShell, type NavItem } from '@/components/layout/AppShell';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Персональная платформа прокачки навыков системного аналитика, устойчивых к автоматизации ИИ.' } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+const currentPath = Astro.url.pathname;
+
+const navItems: NavItem[] = [
+  { href: '/', label: 'Home' },
+  { href: '/scorecard', label: 'Scorecard' },
+  { href: '/cases', label: 'Кейсы' },
+  { href: '/workflows', label: 'Workflows' },
+  { href: '/domain', label: 'Домен' },
+  { href: '/soft-skills', label: 'Soft Skills' },
+  { href: '/journal', label: 'Журнал' },
+  { href: '/settings', label: 'Настройки' },
+];
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title} · AI-Resistance Analyst</title>
+  </head>
+  <body class="min-h-screen bg-background text-foreground antialiased">
+    <AppShell client:load baseUrl={baseUrl} currentPath={currentPath} items={navItems} />
+    <main class="mx-auto max-w-6xl px-4 py-8">
+      <slot />
+    </main>
+  </body>
+</html>

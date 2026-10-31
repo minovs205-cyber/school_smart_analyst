@@ -1,0 +1,64 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ApiKeyForm } from '@/components/settings/ApiKeyForm';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+---
+
+<BaseLayout title="Настройки" description="API-ключ OpenRouter и предпочтения платформы.">
+  <div class="space-y-6">
+    <div class="space-y-2">
+      <Badge variant="secondary">Бесплатные модели OpenRouter</Badge>
+      <h1 class="text-3xl font-semibold tracking-tight">Настройки</h1>
+      <p class="max-w-2xl text-muted-foreground">
+        Платформа для одного пользователя. Прогресс и ключ хранятся локально в браузере — без платных
+        сервисов и без бэкенда.
+      </p>
+    </div>
+
+    <Card>
+      <CardHeader>
+        <CardTitle>OpenRouter API</CardTitle>
+        <CardDescription>
+          Ключ:{" "}
+          <a
+            class="underline underline-offset-4"
+            href="https://openrouter.ai/keys"
+            target="_blank"
+            rel="noreferrer"
+          >
+            openrouter.ai/keys
+          </a>
+          . Для модулей с LLM выбираются модели с суффиксом{" "}
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">:free</code>.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <ApiKeyForm client:load />
+      </CardContent>
+    </Card>
+
+    <Card>
+      <CardHeader>
+        <CardTitle>Деплой</CardTitle>
+        <CardDescription>
+          Репозиторий:{" "}
+          <a
+            class="underline underline-offset-4"
+            href="https://github.com/minovs205-cyber/school_smart_analyst"
+            target="_blank"
+            rel="noreferrer"
+          >
+            minovs205-cyber/school_smart_analyst
+          </a>
+          . После push на{" "}
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">main</code> сайт собирается через GitHub
+          Actions. Включи Pages → Source: GitHub Actions. URL:{" "}
+          <code class="rounded bg-muted px-1 py-0.5 text-xs">
+            https://minovs205-cyber.github.io/school_smart_analyst/
+          </code>
+        </CardDescription>
+      </CardHeader>
+    </Card>
+  </div>
+</BaseLayout>

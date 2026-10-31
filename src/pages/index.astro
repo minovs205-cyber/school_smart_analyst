@@ -1,0 +1,80 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
+const base = import.meta.env.BASE_URL;
+
+const modules = [
+  {
+    href: `${base}scorecard`,
+    title: 'AI-Resistance Scorecard',
+    text: 'Оцени навыки по шкале устойчивости к ИИ и получи рекомендации, что качать первым.',
+  },
+  {
+    href: `${base}cases`,
+    title: 'Сложные кейсы',
+    text: 'Реальные рабочие ситуации + AI-наставник с неудобными вопросами.',
+  },
+  {
+    href: `${base}workflows`,
+    title: 'AI-Augmented Workflows',
+    text: 'Промпты аналитика, поиск ошибок в генерации ИИ, сравнение решений.',
+  },
+  {
+    href: `${base}domain`,
+    title: 'Доменная экспертиза',
+    text: '115-ФЗ, PCI DSS, ЦБ, legacy-интеграции — глубина, которой нет у ИИ.',
+  },
+  {
+    href: `${base}soft-skills`,
+    title: 'Soft Skills & Negotiation',
+    text: 'Симуляции диалогов со сложными стейкхолдерами через OpenRouter.',
+  },
+  {
+    href: `${base}journal`,
+    title: 'Рефлексия',
+    text: 'Еженедельный журнал и поиск паттернов слабых мест.',
+  },
+];
+---
+
+<BaseLayout title="Home">
+  <section class="space-y-6">
+    <div class="space-y-3">
+      <Badge variant="secondary">Персональная антихрупкость · $0 стек</Badge>
+      <h1 class="text-4xl font-semibold tracking-tight">AI-Resistance Analyst</h1>
+      <p class="max-w-2xl text-lg text-muted-foreground">
+        Платформа для прокачки навыков системного аналитика, которые ИИ не умеет заменить:
+        переговоры, неопределённость, архитектура, домен banking и AI-augmented workflows.
+      </p>
+      <div class="flex flex-wrap gap-2">
+        <Button asChild>
+          <a href={`${base}scorecard`}>Открыть Scorecard</a>
+        </Button>
+        <Button asChild variant="outline">
+          <a href={`${base}settings`}>Подключить OpenRouter</a>
+        </Button>
+      </div>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        modules.map((mod) => (
+          <a href={mod.href} class="block transition-opacity hover:opacity-90">
+            <Card class="h-full">
+              <CardHeader>
+                <CardTitle class="text-base">{mod.title}</CardTitle>
+                <CardDescription>{mod.text}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <span class="text-sm text-primary">Перейти →</span>
+              </CardContent>
+            </Card>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

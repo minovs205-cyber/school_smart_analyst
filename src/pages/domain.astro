@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ModuleStub } from '@/components/ModuleStub';
+
+const settingsHref = `${import.meta.env.BASE_URL}settings`;
+---
+
+<BaseLayout title="Домен" description="Глубокая доменная экспертиза banking / fintech.">
+  <ModuleStub
+    client:load
+    title="Доменная экспертиза"
+    step="Шаг 5"
+    description="Регуляторика, legacy-интеграции и банковский контекст — то, что ИИ знает поверхностно."
+    bullets={[
+      'Кейсы по 115-ФЗ, PCI DSS, требованиям ЦБ',
+      'Интеграции с legacy-системами',
+      'Поиск и фильтры по темам',
+      'Контент в Markdown',
+    ]}
+    settingsHref={settingsHref}
+  />
+</BaseLayout>

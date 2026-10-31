@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ModuleStub } from '@/components/ModuleStub';
+
+const settingsHref = `${import.meta.env.BASE_URL}settings`;
+---
+
+<BaseLayout title="Soft Skills" description="Симуляции переговоров и фасилитации.">
+  <ModuleStub
+    client:load
+    title="Soft Skills & Negotiation"
+    step="Шаг 6"
+    description="Диалоги со сложными стейкхолдерами: LLM играет роль оппонента с заданной позицией."
+    bullets={[
+      'Чат-симуляция со стейкхолдером',
+      'Разбор конфликтов и win-win',
+      'Шаблоны рефлексии',
+      'История диалога в localStorage',
+    ]}
+    settingsHref={settingsHref}
+  />
+</BaseLayout>
