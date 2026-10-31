@@ -31,10 +31,11 @@ npm run preview
 ## OpenRouter API-ключ (бесплатные модели)
 
 1. Зайди на [openrouter.ai/keys](https://openrouter.ai/keys) и создай ключ.
-2. В приложении: **Настройки** → вставь ключ → **Сохранить**.
-3. Ключ хранится **только** в `localStorage` браузера.
+2. Локально: скопируй `.env.example` → `.env` и вставь ключ в `PUBLIC_OPENROUTER_API_KEY` (файл в `.gitignore`).
+3. Для GitHub Pages: Settings → Secrets → `OPENROUTER_API_KEY` (подхватывается в Actions как `PUBLIC_OPENROUTER_API_KEY`).
+4. Либо в приложении: **Настройки** → вставь ключ → **Сохранить** (`localStorage`).
 
-**Никогда** не коммить ключ в git, не вставляй в Issues/чаты/скриншоты. Если ключ засветился — сразу revoke и создай новый.
+**Не коммить** `.env` и сам ключ в git. `PUBLIC_*` переменные попадают в клиентский бандл на Pages — для personal MVP это ок, для публичного продукта нет.
 
 Дефолтная модель: `meta-llama/llama-3.3-70b-instruct:free` (список free-моделей: [openrouter.ai/models](https://openrouter.ai/models?q=free)).
 

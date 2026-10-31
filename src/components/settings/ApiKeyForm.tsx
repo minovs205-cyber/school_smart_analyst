@@ -18,6 +18,10 @@ export function ApiKeyForm() {
     const existing = getLlmApiKey();
     if (existing) {
       setSavedMasked(maskKey(existing));
+      // Подтянуть MVP-ключ из build-time env в localStorage, если пользователь ещё ничего не сохранял
+      if (!window.localStorage.getItem('llm_api_key') && !window.localStorage.getItem('groq_api_key')) {
+        setLlmApiKey(existing);
+      }
     }
   }, []);
 

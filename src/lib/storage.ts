@@ -56,12 +56,24 @@ export function setCaseNotes(notes: CaseNote[]): void {
   setItem(STORAGE_KEYS.caseNotes, notes);
 }
 
+function getBuildTimeLlmKey(): string | null {
+  const fromEnv = import.meta.env.PUBLIC_OPENROUTER_API_KEY;
+  if (typeof fromEnv === 'string' && fromEnv.trim().length > 0) {
+    return fromEnv.trim();
+  }
+  return null;
+}
+
 export function getLlmApiKey(): string | null {
-  if (!isBrowser()) return null;
-  return (
-    window.localStorage.getItem(STORAGE_KEYS.llmApiKey) ??
-    window.localStorage.getItem(STORAGE_KEYS.groqApiKey)
-  );
+  if (isBrowser()) {
+    const fromStorage =
+      window.localStorage.getItem(STORAGE_KEYS.llmApiKey) ??
+      window.localStorage.getItem(STORAGE_KEYS.groqApiKey);
+    if (fromStorage && fromStorage.trim().length > 0) {
+      return fromStorage.trim();
+    }
+  }
+  return getBuildTimeLlmKey();
 }
 
 export function setLlmApiKey(key: string): void {
