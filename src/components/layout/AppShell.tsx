@@ -22,7 +22,7 @@ export function AppShell({
   baseUrl,
   currentPath,
   items,
-  title = 'Антихрупкий SA',
+  title = 'Антихрупкий аналитик',
 }: AppShellProps) {
   const [open, setOpen] = useState(false);
   const resolvedItems = items.map((item) => ({

@@ -96,7 +96,7 @@ export const clearGroqApiKey = clearLlmApiKey;
 
 const DEFAULT_SETTINGS: AppSettings = {
   theme: 'system',
-  preferredModel: 'meta-llama/llama-3.3-70b-instruct:free',
+  preferredModel: 'openrouter/free',
 };
 
 export function getSettings(): AppSettings {

@@ -37,7 +37,7 @@ npm run preview
 
 **Не коммить** `.env` и сам ключ в git. `PUBLIC_*` переменные попадают в клиентский бандл на Pages — для personal MVP это ок, для публичного продукта нет.
 
-Дефолтная модель: `meta-llama/llama-3.3-70b-instruct:free` (список free-моделей: [openrouter.ai/models](https://openrouter.ai/models?q=free)).
+Дефолтная модель: `openrouter/free` (роутер актуальных free-моделей: [openrouter.ai/models](https://openrouter.ai/models?q=free)).
 
 Альтернативы: [Groq Free](https://console.groq.com) или локальный [Ollama](https://ollama.com).
 

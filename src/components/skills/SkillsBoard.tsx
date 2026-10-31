@@ -21,6 +21,62 @@ function clampScore(n: number): number {
   return Math.min(10, Math.max(1, Math.round(n)));
 }
 
+/** Короткие подписи оси, чтобы не обрезало длинные названия. */
+const SHORT_LABELS: Record<string, string> = {
+  negotiation: 'Переговоры',
+  uncertainty: 'Неопределённость',
+  architecture: 'Архитектура',
+  'domain-banking': 'Домен банка',
+  regulation: 'Регуляторика',
+  facilitation: 'Фасилитация',
+  'ai-prompting': 'Задачи ИИ',
+  'ai-critique': 'Критика ИИ',
+  legacy: 'Наследие',
+  scope: 'Объём',
+  decisions: 'Решения',
+  discovery: 'Исследование',
+};
+
+function wrapTickLabel(label: string, maxChars = 12): string[] {
+  const words = label.split(/\s+/);
+  const lines: string[] = [];
+  let current = '';
+  for (const word of words) {
+    const next = current ? `${current} ${word}` : word;
+    if (next.length > maxChars && current) {
+      lines.push(current);
+      current = word;
+    } else {
+      current = next;
+    }
+  }
+  if (current) lines.push(current);
+  return lines.slice(0, 2);
+}
+
+function RadarTick(props: {
+  x?: number;
+  y?: number;
+  payload?: { value?: string };
+  cx?: number;
+  cy?: number;
+}) {
+  const { x = 0, y = 0, payload, cx = 0, cy = 0 } = props;
+  const lines = wrapTickLabel(String(payload?.value ?? ''));
+  const dx = x - cx;
+  const dy = y - cy;
+  const textAnchor = Math.abs(dx) < 8 ? 'middle' : dx > 0 ? 'start' : 'end';
+  return (
+    <text x={x} y={y} textAnchor={textAnchor} fill="#8b949e" fontSize={10}>
+      {lines.map((line, i) => (
+        <tspan key={line} x={x} dy={i === 0 ? (dy < -2 ? '-0.35em' : '0.35em') : '1.1em'}>
+          {line}
+        </tspan>
+      ))}
+    </text>
+  );
+}
+
 export function SkillsBoard() {
   const [skills, setLocalSkills] = useState<SkillScore[]>([]);
   const [savedAt, setSavedAt] = useState<string | null>(null);
@@ -33,7 +89,7 @@ export function SkillsBoard() {
   const chartData = useMemo(
     () =>
       skills.map((s) => ({
-        skill: s.name.length > 22 ? `${s.name.slice(0, 20)}…` : s.name,
+        skill: SHORT_LABELS[s.id] ?? s.name,
         fullName: s.name,
         уровень: s.level,
         устойчивость: s.aiResistance,
@@ -95,12 +151,17 @@ export function SkillsBoard() {
             <CardTitle>Радар</CardTitle>
             <CardDescription>Зелёный — твой уровень, фиолетовый — устойчивость к ИИ</CardDescription>
           </CardHeader>
-          <CardContent className="h-80">
+          <CardContent className="h-[28rem] sm:h-96">
             <ResponsiveContainer width="100%" height="100%">
-              <RadarChart data={chartData} cx="50%" cy="50%" outerRadius="70%">
+              <RadarChart data={chartData} cx="50%" cy="50%" outerRadius="58%" margin={{ top: 24, right: 28, bottom: 24, left: 28 }}>
                 <PolarGrid stroke="#30363d" />
-                <PolarAngleAxis dataKey="skill" tick={{ fill: '#8b949e', fontSize: 10 }} />
-                <PolarRadiusAxis angle={30} domain={[0, 10]} tick={{ fill: '#8b949e', fontSize: 10 }} />
+                <PolarAngleAxis dataKey="skill" tick={<RadarTick />} />
+                <PolarRadiusAxis
+                  angle={30}
+                  domain={[0, 10]}
+                  tickCount={6}
+                  tick={{ fill: '#8b949e', fontSize: 9 }}
+                />
                 <Radar
                   name="Уровень"
                   dataKey="уровень"
@@ -171,28 +232,52 @@ export function SkillsBoard() {
                 <Badge variant="secondary">{s.category}</Badge>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                <label className="space-y-1 text-xs text-muted-foreground">
-                  Уровень: <span className="text-primary">{s.level}</span>
+                <div className="space-y-1 text-xs text-muted-foreground">
+                  <label htmlFor={`level-${s.id}`} className="block">
+                    Уровень: <span className="text-primary">{s.level}</span>
+                  </label>
                   <input
+                    id={`level-${s.id}`}
                     type="range"
                     min={1}
                     max={10}
+                    step={1}
                     value={s.level}
+                    aria-valuemin={1}
+                    aria-valuemax={10}
+                    aria-valuenow={s.level}
+                    aria-label={`${s.name}: уровень`}
                     className="w-full accent-[#cdf567]"
                     onChange={(e) => updateSkill(s.id, { level: Number(e.target.value) })}
+                    onInput={(e) =>
+                      updateSkill(s.id, { level: Number((e.target as HTMLInputElement).value) })
+                    }
                   />
-                </label>
-                <label className="space-y-1 text-xs text-muted-foreground">
-                  Устойчивость к ИИ: <span className="text-accent">{s.aiResistance}</span>
+                </div>
+                <div className="space-y-1 text-xs text-muted-foreground">
+                  <label htmlFor={`ai-${s.id}`} className="block">
+                    Устойчивость к ИИ: <span className="text-accent">{s.aiResistance}</span>
+                  </label>
                   <input
+                    id={`ai-${s.id}`}
                     type="range"
                     min={1}
                     max={10}
+                    step={1}
                     value={s.aiResistance}
+                    aria-valuemin={1}
+                    aria-valuemax={10}
+                    aria-valuenow={s.aiResistance}
+                    aria-label={`${s.name}: устойчивость к ИИ`}
                     className="w-full accent-[#c9b7ec]"
                     onChange={(e) => updateSkill(s.id, { aiResistance: Number(e.target.value) })}
+                    onInput={(e) =>
+                      updateSkill(s.id, {
+                        aiResistance: Number((e.target as HTMLInputElement).value),
+                      })
+                    }
                   />
-                </label>
+                </div>
               </div>
             </div>
           ))}

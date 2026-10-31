@@ -34,7 +34,7 @@ export function AiMentor({ caseTitle, caseContext, settingsHref }: AiMentorProps
     try {
       const reply = await chatCompletion({
         temperature: 0.6,
-        maxTokens: 900,
+        maxTokens: 1600,
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
           {
@@ -81,8 +81,7 @@ export function AiMentor({ caseTitle, caseContext, settingsHref }: AiMentorProps
           <Badge className="border-0 bg-accent/20 text-accent">OpenRouter</Badge>
         </div>
         <CardDescription>
-          Раньше наставник «не работал», потому что UI его не вызывал — был только каркас. Сейчас идёт
-          реальный запрос к модели.
+          Реальный диалог через OpenRouter: неудобные вопросы по кейсу, без готового ТЗ.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
