@@ -24,14 +24,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22.23.4"
-          cache: npm
+          node-version: 22
+          # cache disabled: stale npm cache caused flaky npm ci failures
 
       - name: Install dependencies
         run: |
           node -v
           npm -v
-          npm ci
+          npm install --no-fund --no-audit
 
       - name: Build
         run: npm run build
