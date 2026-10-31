@@ -5,17 +5,17 @@ import { ModuleStub } from '@/components/ModuleStub';
 const settingsHref = `${import.meta.env.BASE_URL}settings`;
 ---
 
-<BaseLayout title="Кейсы" description="Библиотека сложных кейсов и AI-наставник.">
+<BaseLayout title="Кейсы" description="Сложные рабочие кейсы и AI-наставник.">
   <ModuleStub
     client:load
     title="Сложные кейсы"
-    step="Шаг 3"
-    description="Markdown-кейсы из реальной работы, фильтры по тегам и AI-наставник через OpenRouter."
+    step="Шаг 3 · скоро"
+    description="Не учебные «напиши user story». Реальные ситуации с работы — анонимно, по делу. AI-наставник будет давить неудобными вопросами, пока ты не разберёшь корень проблемы."
     bullets={[
-      'Astro Content Collections для Markdown',
-      'Список с фильтрами: тип, сложность, домен',
-      'Страница кейса + AI-наставник',
-      'Заметки по кейсам в localStorage',
+      'Библиотека кейсов в Markdown',
+      'Фильтры: тип, сложность, домен',
+      'AI-наставник через OpenRouter',
+      'Личные заметки по кейсу в браузере',
     ]}
     settingsHref={settingsHref}
   />

@@ -48,7 +48,7 @@ export function ApiKeyForm() {
   return (
     <form onSubmit={handleSave} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="llm-api-key">OpenRouter API-ключ</Label>
+        <Label htmlFor="llm-api-key">Ключ OpenRouter</Label>
         <Input
           id="llm-api-key"
           type="password"
@@ -58,9 +58,8 @@ export function ApiKeyForm() {
           onChange={(e) => setValue(e.target.value)}
         />
         <p className="text-xs text-muted-foreground">
-          Ключ хранится только в localStorage. Не коммитьте его в репозиторий и не вставляйте в Issues /
-          чаты. На публичном сайте ключ виден в DevTools — при утечке сразу отзовите его на
-          openrouter.ai/keys.
+          Ключ лежит только в localStorage этого браузера. Не кидай его в git, Issues и чаты. На Pages
+          он виден в DevTools — при утечке сразу отзови на openrouter.ai/keys.
         </p>
         {savedMasked ? (
           <p className="text-xs text-muted-foreground">

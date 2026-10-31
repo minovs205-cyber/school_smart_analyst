@@ -5,17 +5,17 @@ import { ModuleStub } from '@/components/ModuleStub';
 const settingsHref = `${import.meta.env.BASE_URL}settings`;
 ---
 
-<BaseLayout title="Workflows" description="Тренажёр AI-augmented workflows для аналитика.">
+<BaseLayout title="Workflows" description="Тренажёр работы аналитика с ИИ.">
   <ModuleStub
     client:load
     title="AI-Augmented Workflows"
-    step="Шаг 4"
-    description="Практика постановки задач ИИ, поиск ошибок в сгенерированных требованиях и сравнение решений."
+    step="Шаг 4 · скоро"
+    description="ИИ — твой джун, не замена. Здесь ты учишься ставить задачи так, чтобы результат был полезен: находишь ошибки в сгенерированных требованиях и сравниваешь решения."
     bullets={[
-      'Библиотека промптов для аналитика',
-      'Тренажёр: твой промпт → результат LLM → оценка',
-      'Кейсы «найди 5 ошибок в генерации ИИ»',
-      'Сравнение: ты vs ИИ vs идеал',
+      'Промпты для аналитика — готовые шаблоны',
+      'Тренажёр: твой промпт → ответ ИИ → твоя оценка',
+      'Кейсы «найди 5 ошибок в генерации»',
+      'Сравнение: ты vs ИИ vs эталон',
     ]}
     settingsHref={settingsHref}
   />

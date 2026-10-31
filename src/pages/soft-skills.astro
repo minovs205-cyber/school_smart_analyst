@@ -5,17 +5,17 @@ import { ModuleStub } from '@/components/ModuleStub';
 const settingsHref = `${import.meta.env.BASE_URL}settings`;
 ---
 
-<BaseLayout title="Soft Skills" description="Симуляции переговоров и фасилитации.">
+<BaseLayout title="Переговоры" description="Симуляции переговоров со стейкхолдерами.">
   <ModuleStub
     client:load
-    title="Soft Skills & Negotiation"
-    step="Шаг 6"
-    description="Диалоги со сложными стейкхолдерами: LLM играет роль оппонента с заданной позицией."
+    title="Переговоры и soft skills"
+    step="Шаг 6 · скоро"
+    description="Сложный стейкхолдер не читает твой Confluence. Здесь ты тренируешь диалог: ИИ играет роль оппонента с характером и позицией. Цель — win-win, не «согласовали молчанием»."
     bullets={[
       'Чат-симуляция со стейкхолдером',
-      'Разбор конфликтов и win-win',
-      'Шаблоны рефлексии',
-      'История диалога в localStorage',
+      'Разбор конфликтов и поиск win-win',
+      'Шаблоны рефлексии после разговора',
+      'История диалога сохраняется локально',
     ]}
     settingsHref={settingsHref}
   />

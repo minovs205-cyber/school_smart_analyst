@@ -5,16 +5,16 @@ import { ModuleStub } from '@/components/ModuleStub';
 const settingsHref = `${import.meta.env.BASE_URL}settings`;
 ---
 
-<BaseLayout title="Журнал" description="Еженедельная рефлексия и анализ паттернов.">
+<BaseLayout title="Журнал" description="Еженедельная рефлексия и поиск паттернов.">
   <ModuleStub
     client:load
     title="Рефлексия и извлечение уроков"
-    step="Шаг 7"
-    description="Еженедельный журнал: что узнал, где ошибся, как ИИ мог бы помочь — плюс AI-анализ паттернов."
+    step="Шаг 7 · скоро"
+    description="Прокачка без рефлексии — бег на месте. Раз в неделю фиксируй: что узнал, где ошибся, где ИИ помог, а где подставил. AI найдёт паттерны слабых мест."
     bullets={[
       'Форма еженедельного журнала',
-      'Хранение journal_entries в localStorage',
-      'AI-анализ записей через OpenRouter',
+      'Записи в localStorage',
+      'AI-анализ паттернов через OpenRouter',
       'Визуализация прогресса во времени',
     ]}
     settingsHref={settingsHref}

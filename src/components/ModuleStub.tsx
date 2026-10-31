@@ -13,16 +13,21 @@ interface ModuleStubProps {
 export function ModuleStub({ title, step, description, bullets, settingsHref }: ModuleStubProps) {
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-        <Badge variant="secondary">{step}</Badge>
-        <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
-        <p className="max-w-2xl text-muted-foreground">{description}</p>
+      <div className="space-y-3">
+        <Badge className="border border-primary/40 bg-transparent text-primary uppercase tracking-wider">
+          {step}
+        </Badge>
+        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{title}</h1>
+        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">{description}</p>
       </div>
 
-      <Card>
+      <Card className="border-border bg-card/80">
         <CardHeader>
-          <CardTitle>Что будет в модуле</CardTitle>
-          <CardDescription>Каркас готов. Полная реализация — на следующем шаге плана.</CardDescription>
+          <CardTitle>Что тебя ждёт</CardTitle>
+          <CardDescription>
+            Каркас модуля уже на месте. Полная прокачка подключается на следующем шаге — а пока
+            настрой AI-наставника.
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <ul className="list-disc space-y-2 pl-5 text-sm text-muted-foreground">
@@ -30,8 +35,12 @@ export function ModuleStub({ title, step, description, bullets, settingsHref }: 
               <li key={item}>{item}</li>
             ))}
           </ul>
-          <Button asChild variant="outline">
-            <a href={settingsHref}>Настроить OpenRouter API-ключ</a>
+          <Button
+            asChild
+            variant="outline"
+            className="border-primary font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
+          >
+            <a href={settingsHref}>Настроить AI-наставника</a>
           </Button>
         </CardContent>
       </Card>

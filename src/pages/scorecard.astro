@@ -5,17 +5,17 @@ import { ModuleStub } from '@/components/ModuleStub';
 const settingsHref = `${import.meta.env.BASE_URL}settings`;
 ---
 
-<BaseLayout title="Scorecard" description="Трекер навыков и AI-resistance score.">
+<BaseLayout title="Scorecard" description="Оцени навыки и узнай, что качать против автоматизации ИИ.">
   <ModuleStub
     client:load
     title="AI-Resistance Scorecard"
-    step="Шаг 2"
-    description="Трекер навыков с оценкой «насколько ИИ это заменит», radar chart и персональные рекомендации."
+    step="Шаг 2 · скоро"
+    description="Как в игре: смотри свой уровень устойчивости к ИИ. Оцени навыки, увидь radar chart и получи честный ответ — что качать первым, а что можно отдать машине."
     bullets={[
-      'Форма оценки: название, уровень 1–10, AI-resistance 1–10',
-      'Radar chart / heatmap (Recharts)',
-      'Сохранение в localStorage (skills_score)',
-      'Рекомендации: что качать в первую очередь',
+      'Оценка навыка: уровень 1–10 и AI-resistance 1–10',
+      'Radar chart — твоя карта антихрупкости',
+      'Сохранение прогресса в localStorage',
+      'Рекомендации: куда бить усилие прямо сейчас',
     ]}
     settingsHref={settingsHref}
   />
