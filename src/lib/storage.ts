@@ -2,6 +2,7 @@ import {
   STORAGE_KEYS,
   type AppSettings,
   type CaseNote,
+  type CurriculumProgress,
   type JournalEntry,
   type SkillScore,
   type StorageKey,
@@ -105,4 +106,33 @@ export function getSettings(): AppSettings {
 
 export function setSettings(settings: AppSettings): void {
   setItem(STORAGE_KEYS.settings, settings);
+}
+
+const DEFAULT_CURRICULUM: CurriculumProgress = {
+  completedQuestIds: [],
+  updatedAt: new Date(0).toISOString(),
+};
+
+export function getCurriculumProgress(): CurriculumProgress {
+  return getItem<CurriculumProgress>(STORAGE_KEYS.curriculumProgress) ?? {
+    ...DEFAULT_CURRICULUM,
+    completedQuestIds: [],
+  };
+}
+
+export function setCurriculumProgress(progress: CurriculumProgress): void {
+  setItem(STORAGE_KEYS.curriculumProgress, progress);
+}
+
+export function toggleCurriculumQuest(questId: string, done: boolean): CurriculumProgress {
+  const current = getCurriculumProgress();
+  const set = new Set(current.completedQuestIds);
+  if (done) set.add(questId);
+  else set.delete(questId);
+  const next: CurriculumProgress = {
+    completedQuestIds: [...set],
+    updatedAt: new Date().toISOString(),
+  };
+  setCurriculumProgress(next);
+  return next;
 }

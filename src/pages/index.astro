@@ -3,46 +3,74 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CURRICULUM_LEVELS, PLATFORM, getRecommendedQuest } from '@/data/curriculum';
 import { withBase } from '@/lib/paths';
 
 const base = import.meta.env.BASE_URL;
+const today = getRecommendedQuest([]);
+const todayHref = today.quest.href ? withBase(base, today.quest.href) : withBase(base, '/program');
 ---
 
-<BaseLayout title="Главная">
+<BaseLayout title="Главная" description={PLATFORM.goal}>
   <section class="space-y-10">
     <div class="space-y-5">
       <div class="flex flex-wrap gap-2">
         <Badge class="border border-primary/40 bg-transparent text-primary uppercase tracking-wider">
-          Личный тренажёр
+          school_smart_analyst
         </Badge>
         <Badge class="border border-accent/50 bg-transparent text-accent uppercase tracking-wider">
-          Системный аналитик в банке
+          Junior → middle+
         </Badge>
       </div>
 
       <h1 class="max-w-3xl text-4xl font-bold leading-tight tracking-tight md:text-5xl">
-        Прокачай то, что <span class="text-primary">ИИ не заменит</span>
+        {PLATFORM.brandRu}: <span class="text-primary">с ИИ рука об руку</span>
       </h1>
 
       <p class="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-        Не шесть «курсов ради курсов» — один путь на сегодня: оцени навыки, разбери кейс с наставником,
-        зафиксируй урок недели. Остальное — по мере привычки.
+        {PLATFORM.tagline} Шесть уровней как у JavaRush: квесты, практика, кейсы. Наставник — ИИ, не
+        спичрайтер готового ТЗ.
       </p>
+
+      <div class="flex flex-wrap gap-2">
+        <Button asChild class="font-semibold">
+          <a href={withBase(base, '/program')}>Открыть программу</a>
+        </Button>
+        <Button asChild variant="outline" class="border-primary text-primary">
+          <a href={todayHref}>Квест на сегодня</a>
+        </Button>
+      </div>
     </div>
 
     <div class="space-y-4">
       <h2 class="text-xl font-semibold tracking-tight md:text-2xl">Путь на сегодня</h2>
+      <Card class="border-primary/40 bg-card/80">
+        <CardHeader>
+          <Badge class="w-fit bg-primary text-primary-foreground">
+            Уровень {today.level.number} · {today.level.title}
+          </Badge>
+          <CardTitle class="text-base">{today.quest.title}</CardTitle>
+          <CardDescription>{today.quest.do}</CardDescription>
+        </CardHeader>
+        <CardContent class="flex flex-wrap gap-2">
+          <Button asChild class="font-semibold">
+            <a href={todayHref}>Начать квест</a>
+          </Button>
+          <Button asChild variant="outline">
+            <a href={withBase(base, '/program')}>Вся программа</a>
+          </Button>
+        </CardContent>
+      </Card>
+
       <div class="grid gap-4 md:grid-cols-3">
-        <Card class="border-primary/40 bg-card/80">
+        <Card class="border-border bg-card/80">
           <CardHeader>
-            <Badge class="w-fit bg-primary text-primary-foreground">Шаг 1</Badge>
+            <Badge class="w-fit border-0 bg-accent/20 text-accent">Шаг A</Badge>
             <CardTitle class="text-base">Карта навыков</CardTitle>
-            <CardDescription>
-              12 банковских SA-навыков, радар и топ-3 «что качать». Без ИИ — быстро и честно.
-            </CardDescription>
+            <CardDescription>Честная диагностика до любых квестов.</CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild class="font-semibold">
+            <Button asChild variant="outline" class="border-primary font-semibold text-primary">
               <a href={withBase(base, '/scorecard')}>Открыть карту</a>
             </Button>
           </CardContent>
@@ -50,11 +78,9 @@ const base = import.meta.env.BASE_URL;
 
         <Card class="border-border bg-card/80">
           <CardHeader>
-            <Badge class="w-fit border-0 bg-accent/20 text-accent">Шаг 2</Badge>
+            <Badge class="w-fit border-0 bg-accent/20 text-accent">Шаг B</Badge>
             <CardTitle class="text-base">Кейс + ИИ-наставник</CardTitle>
-            <CardDescription>
-              Реальная ситуация из банка. Наставник задаёт неудобные вопросы через OpenRouter.
-            </CardDescription>
+            <CardDescription>Неудобные вопросы, без готового ТЗ.</CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild variant="outline" class="border-primary font-semibold text-primary">
@@ -65,11 +91,9 @@ const base = import.meta.env.BASE_URL;
 
         <Card class="border-border bg-card/80">
           <CardHeader>
-            <Badge variant="secondary" class="w-fit">Шаг 3</Badge>
+            <Badge variant="secondary" class="w-fit">Шаг C</Badge>
             <CardTitle class="text-base">Журнал недели</CardTitle>
-            <CardDescription>
-              Три поля: что узнал, где ошибся, роль ИИ. Привычка важнее идеального текста.
-            </CardDescription>
+            <CardDescription>Урок, ошибка, роль ИИ — привычка middle+.</CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild variant="outline">
@@ -81,20 +105,16 @@ const base = import.meta.env.BASE_URL;
     </div>
 
     <div class="space-y-3">
-      <h2 class="text-lg font-semibold">Позже — когда путь войдёт в привычку</h2>
+      <h2 class="text-lg font-semibold">6 уровней программы</h2>
       <div class="flex flex-wrap gap-2 text-sm">
-        <a class="rounded-full border border-border px-3 py-1 text-muted-foreground hover:border-primary hover:text-primary" href={withBase(base, '/workflows')}>
-          Сценарии с ИИ
-        </a>
-        <a class="rounded-full border border-border px-3 py-1 text-muted-foreground hover:border-primary hover:text-primary" href={withBase(base, '/domain')}>
-          Домен
-        </a>
-        <a class="rounded-full border border-border px-3 py-1 text-muted-foreground hover:border-primary hover:text-primary" href={withBase(base, '/soft-skills')}>
-          Переговоры
-        </a>
-        <a class="rounded-full border border-border px-3 py-1 text-muted-foreground hover:border-primary hover:text-primary" href={withBase(base, '/settings')}>
-          Настройки ключа
-        </a>
+        {CURRICULUM_LEVELS.map((level) => (
+          <a
+            class="rounded-full border border-border px-3 py-1 text-muted-foreground hover:border-primary hover:text-primary"
+            href={withBase(base, '/program')}
+          >
+            L{level.number}. {level.title}
+          </a>
+        ))}
       </div>
     </div>
   </section>

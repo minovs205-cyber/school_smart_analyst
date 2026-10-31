@@ -31,6 +31,12 @@ export interface AppSettings {
   preferredModel: string;
 }
 
+/** Прогресс по программе school_smart_analyst (квесты JavaRush-стиля). */
+export interface CurriculumProgress {
+  completedQuestIds: string[];
+  updatedAt: string;
+}
+
 export const STORAGE_KEYS = {
   skillsScore: 'skills_score',
   journalEntries: 'journal_entries',
@@ -40,6 +46,7 @@ export const STORAGE_KEYS = {
   /** Legacy Groq key — читается как fallback. */
   groqApiKey: 'groq_api_key',
   settings: 'settings',
+  curriculumProgress: 'curriculum_progress',
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];

@@ -1,0 +1,31 @@
+---
+description: Identity and goal of school_smart_analyst platform
+alwaysApply: true
+---
+
+# school_smart_analyst
+
+Also follow root `.cursorrules` (12-role team: PM, Architect, Dev, UX, QA, DevOps, Writer, Security, Marketing, Monetization, SEO, Growth).
+
+## Platform
+
+- **Name / repo:** `school_smart_analyst`
+- **Product voice (RU):** «Антихрупкий аналитик»
+- **Live:** GitHub Pages static Astro app; progress in localStorage; mentor via OpenRouter
+- **Dual goal:** personal antifragility MVP + future public monetization ($0 infra)
+
+## Mission
+
+Prepare a **junior systemic analyst** into a solid **middle+** who does **not fear AI** and works **hand-in-hand with AI** (critique, prompt craft, judgment) — especially in a **bank / regulated** context.
+
+## Learning model (JavaRush-inspired)
+
+- Modular quests with levels, XP-style progression, clear “today’s quest”
+- **AI is the mentor** on cases and drills — not a ghostwriter of full BRD/TZ
+- Core loop: **карта навыков → квест/кейс с наставником → журнал**
+- Prefer Russian UI copy; keep unavoidable domain terms (REST, KYC, ADR) glossed in RU when first used
+
+## Non-goals
+
+- Not a mass SaaS / multi-tenant product in MVP
+- Do not bake secrets into git; `PUBLIC_*` keys are personal-MVP only

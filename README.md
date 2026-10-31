@@ -1,6 +1,8 @@
-# AI-Resistance Analyst
+# school_smart_analyst
 
-Персональная платформа для прокачки навыков системного аналитика, которые сложно автоматизировать ИИ: переговоры, работа с неопределённостью, архитектура, доменная экспертиза (banking), AI-augmented workflows.
+**Антихрупкий аналитик** — персональная платформа: из джуна в крепкого **middle+**, который не боится ИИ, а идёт с ним рука об руку (банк / регуляторика).
+
+Программа в стиле JavaRush: уровни → квесты → практика; **наставник — ИИ**. Описание: [`src/data/curriculum.ts`](src/data/curriculum.ts), UI: `/program`.
 
 **Бюджет: $0** — Astro (static) + GitHub Pages + [OpenRouter](https://openrouter.ai) free models + localStorage.
 
@@ -49,18 +51,19 @@ npm run preview
 
 Сайт: `https://minovs205-cyber.github.io/school_smart_analyst/`
 
-## Модули
+## Модули и программа
 
 | Маршрут | Модуль | Статус |
 |---------|--------|--------|
-| `/` | Home | готов (Шаг 1) |
-| `/scorecard` | AI-Resistance Scorecard | каркас → Шаг 2 |
-| `/cases` | Сложные кейсы | каркас → Шаг 3 |
-| `/workflows` | AI-Augmented Workflows | каркас → Шаг 4 |
-| `/domain` | Доменная экспертиза | каркас → Шаг 5 |
-| `/soft-skills` | Soft Skills & Negotiation | каркас → Шаг 6 |
-| `/journal` | Рефлексия | каркас → Шаг 7 |
-| `/settings` | OpenRouter API-ключ | готов (Шаг 1) |
+| `/` | Главная + квест на сегодня | готов |
+| `/program` | Программа L1–L6 (JavaRush-стиль) | готов |
+| `/scorecard` | Карта навыков | готов |
+| `/cases` | Кейсы + ИИ-наставник | готов |
+| `/workflows` | Сценарии с ИИ | stub |
+| `/domain` | Домен банка | stub |
+| `/soft-skills` | Переговоры | stub |
+| `/journal` | Журнал | готов |
+| `/settings` | Ключ OpenRouter | готов |
 
 Контент Markdown: [`src/content/`](src/content/).
 
@@ -69,5 +72,6 @@ npm run preview
 - `skills_score` — оценки навыков
 - `journal_entries` — журнал рефлексии
 - `case_notes` — заметки по кейсам
+- `curriculum_progress` — закрытые квесты программы
 - `llm_api_key` — API-ключ OpenRouter
 - `settings` — тема и предпочтения
