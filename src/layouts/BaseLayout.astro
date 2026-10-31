@@ -1,31 +1,51 @@
 ---
 import '@/styles/global.css';
 import { AppShell, type NavItem } from '@/components/layout/AppShell';
+import SiteFooter from '@/components/layout/SiteFooter.astro';
+import { absoluteUrl, BRAND_RU, SITE_NAME } from '@/lib/site';
 import { withBase } from '@/lib/paths';
 
 interface Props {
   title: string;
   description?: string;
+  /** Open Graph type */
+  ogType?: 'website' | 'article';
+  /** noindex for settings etc. */
+  noindex?: boolean;
 }
 
 const {
   title,
-  description = 'Персональный тренажёр антихрупкости системного аналитика в банке.',
+  description = 'Тренажёр системного аналитика: junior → middle+, ИИ-наставник, банковский контекст. school_smart_analyst.',
+  ogType = 'website',
+  noindex = false,
 } = Astro.props;
+
 const baseUrl = import.meta.env.BASE_URL;
 const currentPath = Astro.url.pathname;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const pageTitle = `${title} · ${BRAND_RU}`;
+const ogImage = absoluteUrl(baseUrl, '/favicon.svg');
 
 const navItems: NavItem[] = [
   { href: '/', label: 'Главная' },
   { href: '/program', label: 'Программа' },
-  { href: '/scorecard', label: 'Карта навыков' },
+  { href: '/scorecard', label: 'Карта' },
   { href: '/cases', label: 'Кейсы' },
   { href: '/journal', label: 'Журнал' },
-  { href: '/workflows', label: 'Сценарии с ИИ' },
-  { href: '/domain', label: 'Домен' },
-  { href: '/soft-skills', label: 'Переговоры' },
+  { href: '/consultations', label: 'Консультации' },
   { href: '/settings', label: 'Настройки' },
 ];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: BRAND_RU,
+  alternateName: SITE_NAME,
+  url: absoluteUrl(baseUrl, '/'),
+  description,
+  inLanguage: 'ru-RU',
+};
 ---
 
 <!doctype html>
@@ -37,12 +57,29 @@ const navItems: NavItem[] = [
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0d1117" />
-    <title>{title} · Антихрупкий аналитик</title>
+    {noindex ? <meta name="robots" content="noindex,nofollow" /> : <meta name="robots" content="index,follow" />}
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content={BRAND_RU} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <title>{pageTitle}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
-  <body class="min-h-screen">
+  <body class="flex min-h-screen flex-col">
     <AppShell client:load baseUrl={baseUrl} currentPath={currentPath} items={navItems} />
-    <main class="mx-auto max-w-6xl px-4 py-8 md:py-12">
+    <main class="mx-auto w-full max-w-6xl flex-1 px-4 py-8 md:py-12">
       <slot />
     </main>
+    <SiteFooter />
   </body>
 </html>

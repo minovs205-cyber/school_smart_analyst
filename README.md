@@ -36,6 +36,8 @@ npm run preview
 2. Локально: скопируй `.env.example` → `.env` и вставь ключ в `PUBLIC_OPENROUTER_API_KEY` (файл в `.gitignore`).
 3. Для GitHub Pages: Settings → Secrets → `OPENROUTER_API_KEY` (подхватывается в Actions как `PUBLIC_OPENROUTER_API_KEY`).
 4. Либо в приложении: **Настройки** → вставь ключ → **Сохранить** (`localStorage`).
+5. Опционально: `PUBLIC_CAL_URL` — твоя ссылка Cal.com для `/consultations`.
+6. Партнёрские URL: правь [`src/lib/partners.ts`](src/lib/partners.ts) (UTM добавляются сами).
 
 **Не коммить** `.env` и сам ключ в git. `PUBLIC_*` переменные попадают в клиентский бандл на Pages — для personal MVP это ок, для публичного продукта нет.
 
@@ -63,7 +65,12 @@ npm run preview
 | `/domain` | Домен банка | stub |
 | `/soft-skills` | Переговоры | stub |
 | `/journal` | Журнал | готов |
-| `/settings` | Ключ OpenRouter | готов |
+| `/consultations` | Консультации (Cal.com CTA) | готов |
+| `/settings` | Ключ OpenRouter | готов (noindex) |
+| `/sitemap.xml` | Sitemap | готов |
+| `/robots.txt` | Robots | готов |
+
+Коммерческий фундамент: OG/canonical, партнёрские слоты (`src/lib/partners.ts`), шаринг карты, футер.
 
 Контент Markdown: [`src/content/`](src/content/).
 

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { PartnerOffers } from '@/components/commerce/PartnerOffers';
 import { ProgramBoard } from '@/components/program/ProgramBoard';
 import { PLATFORM } from '@/data/curriculum';
 
@@ -7,5 +8,8 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Программа" description={PLATFORM.goal}>
-  <ProgramBoard client:load baseUrl={base} />
+  <div class="space-y-8">
+    <ProgramBoard client:load baseUrl={base} />
+    <PartnerOffers client:load placement="program" campaign="program" title="Инструменты к программе" />
+  </div>
 </BaseLayout>

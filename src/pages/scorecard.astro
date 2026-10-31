@@ -1,8 +1,13 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { SkillsBoard } from '@/components/skills/SkillsBoard';
+
+const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="Карта навыков" description="Оценка навыков SA и устойчивость к автоматизации ИИ.">
-  <SkillsBoard client:load />
+<BaseLayout
+  title="Карта навыков"
+  description="Оценка навыков системного аналитика и устойчивость к автоматизации ИИ. Топ-3 зон роста — можно поделиться."
+>
+  <SkillsBoard client:load baseUrl={base} />
 </BaseLayout>

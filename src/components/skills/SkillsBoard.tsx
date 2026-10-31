@@ -12,9 +12,14 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
+import { ShareScorecard } from '@/components/commerce/ShareScorecard';
 import { createDefaultSkills, rankSkillsToTrain, SKILL_CATALOG } from '@/lib/skills-catalog';
 import { getSkills, setSkills } from '@/lib/storage';
 import type { SkillScore } from '@/lib/types';
+
+interface SkillsBoardProps {
+  baseUrl: string;
+}
 
 function clampScore(n: number): number {
   if (Number.isNaN(n)) return 1;
@@ -77,7 +82,7 @@ function RadarTick(props: {
   );
 }
 
-export function SkillsBoard() {
+export function SkillsBoard({ baseUrl }: SkillsBoardProps) {
   const [skills, setLocalSkills] = useState<SkillScore[]>([]);
   const [savedAt, setSavedAt] = useState<string | null>(null);
 
@@ -215,8 +220,10 @@ export function SkillsBoard() {
                 </div>
               </div>
             ))}
+            <ShareScorecard baseUrl={baseUrl} />
           </CardContent>
         </Card>
+
       </div>
 
       <Card className="border-border bg-card/80">

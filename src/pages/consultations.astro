@@ -1,0 +1,86 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { PartnerOffers } from '@/components/commerce/PartnerOffers';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { getConsultBookingUrl, BRAND_RU } from '@/lib/site';
+import { withBase } from '@/lib/paths';
+
+const base = import.meta.env.BASE_URL;
+const bookingUrl = getConsultBookingUrl();
+const hasCustomCal =
+  typeof import.meta.env.PUBLIC_CAL_URL === 'string' &&
+  import.meta.env.PUBLIC_CAL_URL.trim().length > 0;
+---
+
+<BaseLayout
+  title="Консультации"
+  description="Карьерные консультации и менторинг для системных аналитиков: junior → middle+, работа с ИИ, банковский контекст."
+>
+  <div class="space-y-8">
+    <div class="space-y-3">
+      <Badge class="border border-primary/40 bg-transparent text-primary uppercase tracking-wider">
+        Монетизация · консультации
+      </Badge>
+      <h1 class="text-3xl font-bold tracking-tight md:text-4xl">Консультации</h1>
+      <p class="max-w-2xl text-muted-foreground">
+        {BRAND_RU} остаётся бесплатным тренажёром. Если нужен разбор 1:1 — карьера, резюме, собес,
+        разбор твоего кейса с банка — это отдельный формат.
+      </p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-3">
+      <Card class="border-border bg-card/80">
+        <CardHeader>
+          <CardTitle class="text-base">Разбор карьеры</CardTitle>
+          <CardDescription>60 мин · ориентир 3–7 тыс. ₽</CardDescription>
+        </CardHeader>
+        <CardContent class="text-sm text-muted-foreground">
+          Куда расти SA в банке, что качать против автоматизации ИИ, план на 90 дней.
+        </CardContent>
+      </Card>
+      <Card class="border-border bg-card/80">
+        <CardHeader>
+          <CardTitle class="text-base">Ревью резюме / портфолио</CardTitle>
+          <CardDescription>асинхронно · ориентир 2–4 тыс. ₽</CardDescription>
+        </CardHeader>
+        <CardContent class="text-sm text-muted-foreground">
+          Правки под middle+, акцент на кейсы и антихрупкие навыки, а не список инструментов.
+        </CardContent>
+      </Card>
+      <Card class="border-primary/40 bg-card/80">
+        <CardHeader>
+          <CardTitle class="text-base">Менторинг</CardTitle>
+          <CardDescription>пакет 4 недели · по договорённости</CardDescription>
+        </CardHeader>
+        <CardContent class="text-sm text-muted-foreground">
+          Сопровождение по программе school_smart_analyst + разборы с ИИ-наставником.
+        </CardContent>
+      </Card>
+    </div>
+
+    <Card class="border-primary/40 bg-card/80">
+      <CardHeader>
+        <CardTitle>Запись</CardTitle>
+        <CardDescription>
+          {
+            hasCustomCal
+              ? 'Слот через Cal.com (или твой календарь).'
+              : 'Задай PUBLIC_CAL_URL в .env / GitHub Secrets на свою ссылку Cal.com — пока открывается общий cal.com.'
+          }
+        </CardDescription>
+      </CardHeader>
+      <CardContent class="flex flex-wrap gap-2">
+        <Button asChild class="font-semibold">
+          <a href={bookingUrl} target="_blank" rel="noopener noreferrer">Выбрать слот</a>
+        </Button>
+        <Button asChild variant="outline">
+          <a href={withBase(base, '/program')}>Сначала пройти программу</a>
+        </Button>
+      </CardContent>
+    </Card>
+
+    <PartnerOffers client:load placement="consultations" campaign="consultations" title="Рядом с менторингом" />
+  </div>
+</BaseLayout>

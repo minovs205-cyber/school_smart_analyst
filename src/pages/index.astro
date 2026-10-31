@@ -39,6 +39,9 @@ const todayHref = today.quest.href ? withBase(base, today.quest.href) : withBase
         <Button asChild variant="outline" class="border-primary text-primary">
           <a href={todayHref}>Квест на сегодня</a>
         </Button>
+        <Button asChild variant="outline" class="border-accent text-accent">
+          <a href={withBase(base, '/consultations')}>Консультации</a>
+        </Button>
       </div>
     </div>
 

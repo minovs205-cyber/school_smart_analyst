@@ -1,0 +1,54 @@
+---
+import { partnersFor, withUtm } from '@/lib/partners';
+import { withBase } from '@/lib/paths';
+import { BRAND_RU, SITE_NAME } from '@/lib/site';
+
+const base = import.meta.env.BASE_URL;
+const footerPartners = partnersFor('footer');
+---
+
+<footer class="mt-16 border-t border-border/80 bg-card/40">
+  <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
+    <div class="space-y-2">
+      <p class="text-sm font-bold uppercase tracking-wide">{BRAND_RU}</p>
+      <p class="text-xs text-muted-foreground">
+        {SITE_NAME}: junior → middle+, ИИ-наставник, банковский контекст. Личный тренажёр с заделом
+        под публичную аудиторию.
+      </p>
+    </div>
+
+    <div class="space-y-2 text-sm">
+      <p class="font-medium">Навигация</p>
+      <ul class="space-y-1 text-muted-foreground">
+        <li><a class="hover:text-primary" href={withBase(base, '/program')}>Программа</a></li>
+        <li><a class="hover:text-primary" href={withBase(base, '/consultations')}>Консультации</a></li>
+        <li><a class="hover:text-primary" href={withBase(base, '/cases')}>Кейсы</a></li>
+        <li><a class="hover:text-primary" href={withBase(base, '/settings')}>Настройки</a></li>
+      </ul>
+    </div>
+
+    <div class="space-y-2 text-sm">
+      <p class="font-medium">Партнёры</p>
+      <ul class="space-y-1 text-muted-foreground">
+        {
+          footerPartners.map((p) => (
+            <li>
+              <a
+                class="hover:text-primary"
+                href={withUtm(p.url, { campaign: 'footer', content: p.id })}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+              >
+                {p.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="pt-2 text-xs text-muted-foreground">
+        Партнёрские ссылки помечены sponsored. Подставь свои affiliate URL в{' '}
+        <code class="text-accent">src/lib/partners.ts</code>.
+      </p>
+    </div>
+  </div>
+</footer>

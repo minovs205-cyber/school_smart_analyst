@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /school_smart_analyst/
+
+Sitemap: https://minovs205-cyber.github.io/school_smart_analyst/sitemap.xml
