@@ -16,7 +16,7 @@ interface Props {
 
 const {
   title,
-  description = 'Тренажёр системного аналитика: junior → middle+, ИИ-наставник, банковский контекст. school_smart_analyst.',
+  description = 'Инженерная платформа для системных аналитиков: антихрупкость, делегирование рутины ИИ, фокус на архитектуре. school_smart_analyst.',
   ogType = 'website',
   noindex = false,
 } = Astro.props;
@@ -30,7 +30,7 @@ const ogImage = absoluteUrl(baseUrl, '/favicon.svg');
 const navItems: NavItem[] = [
   { href: '/', label: 'Главная' },
   { href: '/program', label: 'Программа' },
-  { href: '/scorecard', label: 'Карта' },
+  { href: '/scorecard', label: 'Диагностика' },
   { href: '/cases', label: 'Кейсы' },
   { href: '/journal', label: 'Журнал' },
   { href: '/consultations', label: 'Консультации' },

@@ -83,10 +83,10 @@ export function JournalBoard() {
         <Badge className="border border-primary/40 bg-transparent text-primary uppercase tracking-wider">
           Модуль · Журнал
         </Badge>
-        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Журнал недели</h1>
+        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Журнал инсайтов</h1>
         <p className="max-w-2xl text-muted-foreground">
-          Три вопроса — без эссе. Раз в неделю фиксируй уроки, ошибки и роль ИИ. AI-разбор паттернов
-          подключим позже; сначала привычка.
+          Три поля — без эссе. Фиксируйте решения, ошибки суждения и роль ИИ. Разбор паттернов
+          подключим позже; сначала инженерная привычка.
         </p>
       </div>
 

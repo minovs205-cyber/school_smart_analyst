@@ -1,28 +1,21 @@
 import { withBase } from '@/lib/paths';
 
 /**
- * Базовая программа school_smart_analyst — путь junior → middle+.
- * Структура как у JavaRush: уровни → квесты → практика с ИИ-наставником.
+ * Программа school_smart_analyst — модули профессионального роста Middle+/Senior.
+ * Практика: теория → упражнение → кейс с ИИ-наставником → рефлексия.
  */
 
 export type QuestKind = 'theory' | 'practice' | 'case' | 'mentor' | 'reflection' | 'capstone';
-export type QuestStatusHint = 'available' | 'locked' | 'recommended';
 
 export interface CurriculumQuest {
   id: string;
   title: string;
   kind: QuestKind;
-  /** Что сделаешь руками */
   do: string;
-  /** Как помогает ИИ-наставник */
   mentorRole: string;
-  /** Критерий «квест закрыт» */
   doneWhen: string;
-  /** Относительный путь приложения (без base) */
   href?: string;
-  /** Связанный slug кейса */
   caseSlug?: string;
-  /** Связанные skill ids из каталога */
   skillIds?: string[];
   estimatedMinutes: number;
 }
@@ -32,9 +25,9 @@ export interface CurriculumLevel {
   number: number;
   title: string;
   subtitle: string;
-  /** Выход уровня: что умеешь как middle-кандидат */
   outcome: string;
-  xp: number;
+  /** Условный вес модуля для прогресса */
+  weight: number;
   quests: CurriculumQuest[];
 }
 
@@ -45,29 +38,27 @@ export interface CurriculumModule {
   shortTitle: string;
   href: string;
   blurb: string;
-  /** Почему модуль важен против «замены ИИ» */
   aiPartnership: string;
 }
 
 export const PLATFORM = {
   id: 'school_smart_analyst',
-  brandRu: 'Антихрупкий аналитик',
+  brandRu: 'Антихрупкий системный аналитик',
   tagline:
-    'Из джуна в крепкого middle+: не бояться ИИ, а идти с ним рука об руку.',
+    'Превратите генеративный ИИ в своего младшего помощника. Делегируйте рутину, работайте с неопределённостью и фокусируйтесь на архитектуре.',
   goal:
-    'Подготовить системного аналитика банка уровня middle+: суждение, переговоры, неопределённость, домен и критическая работа с ИИ.',
+    'Инженерная платформа для практикующих SA: антихрупкость, делегирование рутины ИИ, фокус на архитектуре, бизнес-ценности и стейкхолдерах.',
 } as const;
 
-/** Карта модулей платформы (навигация + программа). */
 export const CURRICULUM_MODULES: CurriculumModule[] = [
   {
     id: 'scorecard',
     order: 1,
-    title: 'Карта навыков',
-    shortTitle: 'Карта',
+    title: 'AI-диагностика',
+    shortTitle: 'Диагностика',
     href: '/scorecard',
-    blurb: 'Базовая диагностика: где ты сейчас и что качать первым.',
-    aiPartnership: 'ИИ не ставит тебе оценки за тебя — ты честно меришь себя, ИИ потом бьёт в слабые зоны.',
+    blurb: 'Ситуационные вопросы и первичная оценка компетенций за ~5 минут.',
+    aiPartnership: 'ИИ задаёт контекст и разбирает подход — без самооценки ползунками.',
   },
   {
     id: 'workflows',
@@ -75,8 +66,8 @@ export const CURRICULUM_MODULES: CurriculumModule[] = [
     title: 'Сценарии с ИИ',
     shortTitle: 'Сценарии',
     href: '/workflows',
-    blurb: 'Промпты аналитика, разбор галлюцинаций, сравнение вариантов.',
-    aiPartnership: 'Учишься ставить задачи модели и ловить дыры — рука об руку, не «сдай ТЗ».',
+    blurb: 'Контекст, критерии приёмки, разбор галлюцинаций.',
+    aiPartnership: 'Постановка задачи модели и инженерная валидация результата.',
   },
   {
     id: 'domain',
@@ -84,8 +75,8 @@ export const CURRICULUM_MODULES: CurriculumModule[] = [
     title: 'Домен банка',
     shortTitle: 'Домен',
     href: '/domain',
-    blurb: 'Платежи, кредиты, KYC/115-ФЗ, клиентский путь.',
-    aiPartnership: 'Модель знает википедию; ты знаешь, как у вас на проде и что скажет комплаенс.',
+    blurb: 'Платежи, онбординг, регуляторика, legacy.',
+    aiPartnership: 'ИИ-интервью по домену; решение остаётся за аналитиком.',
   },
   {
     id: 'cases',
@@ -93,8 +84,8 @@ export const CURRICULUM_MODULES: CurriculumModule[] = [
     title: 'Кейсы',
     shortTitle: 'Кейсы',
     href: '/cases',
-    blurb: 'Реальные напряжения банка + диалог с ИИ-наставником.',
-    aiPartnership: 'Наставник давит вопросами; готовое решение не выдаёт.',
+    blurb: 'Банковские напряжения + диалог с ИИ-наставником.',
+    aiPartnership: 'Наставник уточняет; архитектурное решение — ваше.',
   },
   {
     id: 'soft-skills',
@@ -102,62 +93,56 @@ export const CURRICULUM_MODULES: CurriculumModule[] = [
     title: 'Переговоры',
     shortTitle: 'Переговоры',
     href: '/soft-skills',
-    blurb: 'Стейкхолдеры, конфликт интересов, фасилитация.',
-    aiPartnership: 'ИИ — спарринг-партнёр оппонента, не спичрайтер для спонсора.',
+    blurb: 'Стейкхолдеры, фасилитация, подготовка к встречам.',
+    aiPartnership: 'ИИ как спарринг для аргументов и повестки.',
   },
   {
     id: 'journal',
     order: 6,
-    title: 'Журнал',
+    title: 'Журнал инсайтов',
     shortTitle: 'Журнал',
     href: '/journal',
-    blurb: 'Еженедельная рефлексия: урок, ошибка, роль ИИ.',
-    aiPartnership: 'Привычка важнее идеального текста; разбор паттернов — позже с наставником.',
+    blurb: 'Фиксация решений и роли ИИ в работе.',
+    aiPartnership: 'Рефлексия усиливает антихрупкость быстрее идеального текста.',
   },
 ];
 
-/**
- * Уровни 1–6 ≈ 8–12 недель при 4–6 ч/нед.
- * JavaRush-логика: теория коротко → практика → кейс с ментором → рефлексия.
- */
 export const CURRICULUM_LEVELS: CurriculumLevel[] = [
   {
     id: 'L1',
     number: 1,
-    title: 'Ориентир и союз с ИИ',
-    subtitle: 'Не «ИИ заменит», а «я + ИИ сильнее»',
-    outcome: 'Понимаешь свою карту навыков, умеешь начать диалог с наставником, ведёшь журнал.',
-    xp: 100,
+    title: 'Синхронизация с ИИ',
+    subtitle: 'Контекст вместо воды',
+    outcome: 'Формулируете контекст так, что модель отдаёт структуру, а не общие слова.',
+    weight: 100,
     quests: [
       {
         id: 'L1-Q1',
-        title: 'Диагностика: карта 12 навыков',
+        title: 'AI-диагностика компетенций',
         kind: 'practice',
-        do: 'Оцени уровень и устойчивость к ИИ по каждому навыку. Сохрани.',
-        mentorRole: 'Пока не нужен — сначала честная самооценка.',
-        doneWhen: 'Карта сохранена, видишь топ-3 «качать первым».',
+        do: 'Пройдите ситуационную диагностику (~5 мин) и сохраните первичную оценку.',
+        mentorRole: 'Задаёт вопросы и формирует профиль для трека.',
+        doneWhen: 'Результат диагностики сохранён.',
         href: '/scorecard',
-        skillIds: ['negotiation', 'uncertainty', 'ai-prompting'],
-        estimatedMinutes: 25,
+        estimatedMinutes: 5,
       },
       {
         id: 'L1-Q2',
-        title: 'Контракт с наставником',
+        title: 'Диалог с ИИ-наставником',
         kind: 'mentor',
-        do: 'Открой любой кейс, нажми «Начать разбор», ответь на 2 вопроса наставника своими словами.',
-        mentorRole: 'Задаёт неудобные стартовые вопросы; ловит общие слова.',
-        doneWhen: 'Есть минимум 1 полный обмен «ты → наставник → ты».',
+        do: 'Откройте кейс и ответьте на 2 уточняющих вопроса наставника своими словами.',
+        mentorRole: 'Уточняет стейкхолдеров, риски и критерии приёмки.',
+        doneWhen: 'Есть полный обмен «вы → наставник → вы».',
         href: '/cases/legacy-payment-cutoff',
         caseSlug: 'legacy-payment-cutoff',
-        skillIds: ['ai-prompting', 'ai-critique'],
         estimatedMinutes: 30,
       },
       {
         id: 'L1-Q3',
-        title: 'Первая неделя в журнале',
+        title: 'Инсайт недели',
         kind: 'reflection',
-        do: 'Заполни: что узнал / где ошибся / как ИИ помог или мешал.',
-        mentorRole: 'Позже разберёт паттерны; сейчас — привычка.',
+        do: 'Зафиксируйте: что усилили, где ошибка суждения, какую рутину делегировали ИИ.',
+        mentorRole: 'Позже разберёт паттерны.',
         doneWhen: 'Есть запись текущей недели.',
         href: '/journal',
         estimatedMinutes: 15,
@@ -167,41 +152,39 @@ export const CURRICULUM_LEVELS: CurriculumLevel[] = [
   {
     id: 'L2',
     number: 2,
-    title: 'Язык аналитика + критика генерации',
-    subtitle: 'Истории, критерии приёмки, дыры в тексте модели',
-    outcome: 'Пишешь чёткие критерии приёмки и находишь минимум 3 дыры в черновике от ИИ.',
-    xp: 150,
+    title: 'Язык аналитика и критика генерации',
+    subtitle: 'Валидация вместо доверия к уверенному тону',
+    outcome: 'Находите дыры в генерации и формулируете критерии приёмки.',
+    weight: 150,
     quests: [
       {
         id: 'L2-Q1',
-        title: 'Сценарий: постановка задачи ИИ',
+        title: 'Шаблон постановки задачи ИИ',
         kind: 'practice',
-        do: 'Пройди модуль сценариев: контекст → критерии → итерация (пока stub — зафиксируй свой шаблон промпта в заметках).',
-        mentorRole: 'Проверит, не слишком ли общий промпт и где нет DoD.',
-        doneWhen: 'Есть личный шаблон: роль, контекст банка, артефакт, критерии, анти-паттерны.',
+        do: 'Соберите шаблон: роль, контекст банка, артефакт, DoD, анти-паттерны.',
+        mentorRole: 'Проверит полноту контекста.',
+        doneWhen: 'Шаблон готов к повторному использованию.',
         href: '/workflows',
-        skillIds: ['ai-prompting', 'scope'],
         estimatedMinutes: 40,
       },
       {
         id: 'L2-Q2',
-        title: 'Квест: дыры в «готовых» историях',
+        title: 'Ревью «готовых» историй от модели',
         kind: 'mentor',
-        do: 'Попроси наставника сгенерировать 3 user story по кейсу cutoff — затем сам найди дыры; наставник бьёт в пропущенное.',
-        mentorRole: 'Сначала «плохой отличник», потом жёсткий ревьюер.',
-        doneWhen: 'Список ≥3 дыр (стейкхолдер, данные, идемпотентность, безопасность…).',
+        do: 'Попросите наставника сгенерировать истории по кейсу cutoff — найдите ≥3 дыры.',
+        mentorRole: 'Сначала генератор, затем ревьюер.',
+        doneWhen: 'Список дыр с обоснованием.',
         href: '/cases/legacy-payment-cutoff',
         caseSlug: 'legacy-payment-cutoff',
-        skillIds: ['ai-critique', 'scope'],
         estimatedMinutes: 45,
       },
       {
         id: 'L2-Q3',
-        title: 'Журнал: урок про критерии приёмки',
+        title: 'Критерий приёмки: до / после',
         kind: 'reflection',
-        do: 'Запиши один критерий, который раньше писал размыто, и как переписал.',
+        do: 'Запишите один критерий, который был размыт, и как переписали.',
         mentorRole: '—',
-        doneWhen: 'Запись в журнале с конкретным до/после.',
+        doneWhen: 'Запись в журнале.',
         href: '/journal',
         estimatedMinutes: 15,
       },
@@ -210,43 +193,40 @@ export const CURRICULUM_LEVELS: CurriculumLevel[] = [
   {
     id: 'L3',
     number: 3,
-    title: 'Домен банка без википедии',
-    subtitle: 'Платежи, онбординг, 115-ФЗ — где модель врёт уверенно',
-    outcome: 'Отличаешь «общее знание» от банковского риска; ставишь границы данных и процессов.',
-    xp: 180,
+    title: 'Доменная экспертиза без Wiki',
+    subtitle: 'Банк, legacy, регуляторика',
+    outcome: 'Отличаете общее знание модели от риска на проде.',
+    weight: 180,
     quests: [
       {
         id: 'L3-Q1',
-        title: 'Доменный конспект: платежный путь',
+        title: 'Платёжный путь своими словами',
         kind: 'theory',
-        do: 'В модуле Домен зафиксируй: инициация → авторизация/клиринг → статус → сверка (своими словами).',
-        mentorRole: 'Проверит, не смешал ли online и batch.',
-        doneWhen: '5–7 предложений своего конспекта без копипаста.',
+        do: 'Зафиксируйте: инициация → клиринг/статус → сверка (без копипаста).',
+        mentorRole: 'Проверит online vs batch.',
+        doneWhen: 'Конспект 5–7 предложений.',
         href: '/domain',
-        skillIds: ['domain-banking', 'legacy'],
         estimatedMinutes: 50,
       },
       {
         id: 'L3-Q2',
         title: 'Кейс: чат-бот и 115-ФЗ',
         kind: 'case',
-        do: 'Разбери кейс онбординга с наставником: что можно боту, что нельзя подрядчику.',
-        mentorRole: 'Давит на ПДн, идентификации, DPA, КИБ.',
-        doneWhen: 'Таблица: данные × можно/нельзя × где хранить × кто владелец риска.',
+        do: 'Разложите: данные × можно/нельзя × хранение × владелец риска.',
+        mentorRole: 'Давит на ПДн, идентификацию, подрядчика.',
+        doneWhen: 'Таблица границ готова.',
         href: '/cases/115fz-chatbot-kyc',
         caseSlug: '115fz-chatbot-kyc',
-        skillIds: ['regulation', 'domain-banking', 'negotiation'],
         estimatedMinutes: 60,
       },
       {
         id: 'L3-Q3',
-        title: 'Обнови карту: домен и регуляторика',
+        title: 'Повторная диагностика после домена',
         kind: 'practice',
-        do: 'Пересмотри оценки «Домен» и «Регуляторика» после кейса.',
+        do: 'Пройдите AI-диагностику снова и сравните профиль.',
         mentorRole: '—',
-        doneWhen: 'Оценки обновлены и сохранены.',
+        doneWhen: 'Новый результат сохранён.',
         href: '/scorecard',
-        skillIds: ['domain-banking', 'regulation'],
         estimatedMinutes: 10,
       },
     ],
@@ -254,32 +234,30 @@ export const CURRICULUM_LEVELS: CurriculumLevel[] = [
   {
     id: 'L4',
     number: 4,
-    title: 'Неопределённость и интеграции',
-    subtitle: 'Legacy, cutoff, eventual — управляемый объём',
-    outcome: 'Режешь scope без «зарубить идею»; явно фиксируешь риски и допущения.',
-    xp: 200,
+    title: 'Работа с неопределённостью',
+    subtitle: 'Скрытые требования и интеграции',
+    outcome: 'Управляете scope: риски и допущения явны.',
+    weight: 200,
     quests: [
       {
         id: 'L4-Q1',
-        title: 'Кейс: ночной cutoff и «простое» API',
+        title: 'Кейс: cutoff и REST поверх пакета',
         kind: 'case',
-        do: 'Предложи MVP: что online, что eventual, какие критерии приёмки и стоп-факторы.',
-        mentorRole: 'Ломает красивые REST-сказки вопросами про идемпотентность и дубли.',
-        doneWhen: '1 страница: scope must/should, риски, метрики успеха, вопросы архитектору.',
+        do: 'MVP: online / eventual, критерии, стоп-факторы.',
+        mentorRole: 'Ломает упрощения про идемпотентность и дубли.',
+        doneWhen: 'Одна страница решения.',
         href: '/cases/legacy-payment-cutoff',
         caseSlug: 'legacy-payment-cutoff',
-        skillIds: ['uncertainty', 'legacy', 'architecture', 'scope'],
         estimatedMinutes: 70,
       },
       {
         id: 'L4-Q2',
-        title: 'Журнал решений (ADR-lite)',
+        title: 'ADR-lite по решению',
         kind: 'practice',
-        do: 'Оформи 1 решение: контекст → варианты → выбор → последствия.',
-        mentorRole: 'Спросит «почему не вариант A» до тех пор, пока ответ не станет конкретным.',
-        doneWhen: 'ADR на полстраницы сохранён (журнал или заметка кейса).',
+        do: 'Контекст → варианты → выбор → последствия.',
+        mentorRole: 'Спросит «почему не A».',
+        doneWhen: 'ADR сохранён.',
         href: '/journal',
-        skillIds: ['decisions'],
         estimatedMinutes: 30,
       },
     ],
@@ -288,39 +266,37 @@ export const CURRICULUM_LEVELS: CurriculumLevel[] = [
     id: 'L5',
     number: 5,
     title: 'Люди и переговоры',
-    subtitle: 'Спонсор, комплаенс, ИБ — один стол',
-    outcome: 'Ведишь конфликт интересов к взаимовыгодному объёму, не к «победе в споре».',
-    xp: 200,
+    subtitle: 'Стейкхолдеры и фасилитация',
+    outcome: 'Готовите встречи и аргументы с опорой на ИИ как ассистента.',
+    weight: 200,
     quests: [
       {
         id: 'L5-Q1',
-        title: 'Спарринг: оппонент с характером',
+        title: 'Спарринг со стейкхолдером',
         kind: 'mentor',
-        do: 'В модуле Переговоры (или в кейсе 115-ФЗ) попроси наставника сыграть CISO / спонсора.',
-        mentorRole: 'Играет жёсткого стейкхолдера; потом даёт разбор твоих ходов.',
-        doneWhen: 'Зафиксированы 3 хода: твоя позиция → возражение → твой ответ с вопросом.',
+        do: 'Попросите наставника сыграть CISO / спонсора; зафиксируйте 3 хода.',
+        mentorRole: 'Жёсткий оппонент + разбор.',
+        doneWhen: 'Три хода диалога записаны.',
         href: '/soft-skills',
-        skillIds: ['negotiation', 'facilitation'],
         estimatedMinutes: 45,
       },
       {
         id: 'L5-Q2',
-        title: 'Фасилитация на бумаге',
+        title: 'Повестка воркшопа 45 мин',
         kind: 'practice',
-        do: 'Составь повестку 45-мин воркшопа: цель, роли, решения к концу, парковка конфликтов.',
-        mentorRole: 'Проверит, есть ли явный decision owner.',
-        doneWhen: 'Повестка из 6–8 пунктов готова.',
+        do: 'Цель, роли, решения к концу, парковка конфликтов.',
+        mentorRole: 'Проверит decision owner.',
+        doneWhen: 'Повестка 6–8 пунктов.',
         href: '/soft-skills',
-        skillIds: ['facilitation', 'negotiation'],
         estimatedMinutes: 35,
       },
       {
         id: 'L5-Q3',
-        title: 'Рефлексия недели переговоров',
+        title: 'Рефлексия переговоров',
         kind: 'reflection',
-        do: 'В журнале: где сдавил / где сдался / где ИИ подсказал слабый аргумент.',
+        do: 'Где усилили позицию / где уступили / где ИИ дал слабый аргумент.',
         mentorRole: '—',
-        doneWhen: 'Запись недели с фокусом на людей.',
+        doneWhen: 'Запись в журнале.',
         href: '/journal',
         estimatedMinutes: 15,
       },
@@ -329,48 +305,39 @@ export const CURRICULUM_LEVELS: CurriculumLevel[] = [
   {
     id: 'L6',
     number: 6,
-    title: 'Синтез middle+',
-    subtitle: 'Свой playbook: суждение + ИИ как усилитель',
-    outcome: 'Есть личный playbook и закрытый capstone: кейс от входа до решения без готового ТЗ от модели.',
-    xp: 250,
+    title: 'Синтез Middle+',
+    subtitle: 'ИИ — младший инженер',
+    outcome: 'Есть playbook и закрытый разбор кейса end-to-end.',
+    weight: 250,
     quests: [
       {
         id: 'L6-Q1',
-        title: 'Повторная карта навыков',
+        title: 'Диагностика: дельта роста',
         kind: 'practice',
-        do: 'Пройди карту снова. Сравни с L1: что выросло, что всё ещё дыра.',
-        mentorRole: 'Разберёт дельту и предложит фокус на квартал.',
-        doneWhen: 'Новые оценки сохранены; 3 цели на следующий цикл.',
+        do: 'Повторная AI-диагностика; 3 фокуса на квартал.',
+        mentorRole: 'Разберёт дельту.',
+        doneWhen: 'Профиль и цели сохранены.',
         href: '/scorecard',
         estimatedMinutes: 25,
       },
       {
         id: 'L6-Q2',
-        title: 'Capstone: полный разбор одного кейса',
+        title: 'Capstone: полный разбор кейса',
         kind: 'capstone',
-        do: 'Выбери кейс. Артефакты: стейкхолдеры, допущения, scope, риски, критерии, открытые вопросы, роль ИИ в работе.',
-        mentorRole: 'Финальный экзаменатор: бьёт в слабые места, не пишет артефакты за тебя.',
-        doneWhen: 'Пакет артефактов + журнал «что бы сделал иначе».',
+        do: 'Стейкхолдеры, допущения, scope, риски, критерии, роль ИИ.',
+        mentorRole: 'Экзаменатор по слабым местам.',
+        doneWhen: 'Пакет артефактов + ретро.',
         href: '/cases',
-        skillIds: [
-          'negotiation',
-          'uncertainty',
-          'architecture',
-          'domain-banking',
-          'ai-critique',
-          'decisions',
-        ],
         estimatedMinutes: 120,
       },
       {
         id: 'L6-Q3',
         title: 'Playbook аналитика + ИИ',
         kind: 'reflection',
-        do: '1 страница: когда зову ИИ / когда не зову / чеклист ревью генерации / красные флаги банка.',
-        mentorRole: 'Ревью playbook на пустые лозунги.',
-        doneWhen: 'Playbook в журнале или отдельной заметке.',
+        do: 'Когда зову ИИ / когда нет / чеклист ревью / красные флаги банка.',
+        mentorRole: 'Ревью на пустые формулировки.',
+        doneWhen: 'Playbook зафиксирован.',
         href: '/journal',
-        skillIds: ['ai-prompting', 'ai-critique', 'discovery'],
         estimatedMinutes: 40,
       },
     ],
@@ -385,8 +352,13 @@ export function getAllQuests(): CurriculumQuest[] {
   return CURRICULUM_LEVELS.flatMap((l) => l.quests);
 }
 
+export function totalWeight(): number {
+  return CURRICULUM_LEVELS.reduce((sum, l) => sum + l.weight, 0);
+}
+
+/** @deprecated используйте totalWeight */
 export function totalXp(): number {
-  return CURRICULUM_LEVELS.reduce((sum, l) => sum + l.xp, 0);
+  return totalWeight();
 }
 
 export function resolveQuestHref(baseUrl: string, quest: CurriculumQuest): string | undefined {
@@ -394,7 +366,6 @@ export function resolveQuestHref(baseUrl: string, quest: CurriculumQuest): strin
   return withBase(baseUrl, quest.href);
 }
 
-/** Рекомендация «квест на сегодня»: первый квест L1, далее — по порядку программы. */
 export function getRecommendedQuest(completedQuestIds: string[] = []): {
   level: CurriculumLevel;
   quest: CurriculumQuest;

@@ -27,7 +27,7 @@ export function PartnerOffers({
           <Badge variant="outline">партнёрские ссылки</Badge>
         </div>
         <CardDescription>
-          Рекомендации к квесту. Покупки по ссылкам могут поддерживать платформу — без навязчивой
+          Рекомендации к практике. Покупки по ссылкам могут поддерживать платформу — без навязчивой
           рекламы.
         </CardDescription>
       </CardHeader>

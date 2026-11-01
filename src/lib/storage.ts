@@ -6,6 +6,7 @@ import {
   type JournalEntry,
   type SkillScore,
   type StorageKey,
+  type StoredDiagnosticResult,
 } from '@/lib/types';
 
 function isBrowser(): boolean {
@@ -135,4 +136,16 @@ export function toggleCurriculumQuest(questId: string, done: boolean): Curriculu
   };
   setCurriculumProgress(next);
   return next;
+}
+
+export function getDiagnosticResult(): StoredDiagnosticResult | null {
+  return getItem<StoredDiagnosticResult>(STORAGE_KEYS.diagnosticResult);
+}
+
+export function setDiagnosticResult(result: StoredDiagnosticResult): void {
+  setItem(STORAGE_KEYS.diagnosticResult, result);
+}
+
+export function clearDiagnosticResult(): void {
+  removeItem(STORAGE_KEYS.diagnosticResult);
 }

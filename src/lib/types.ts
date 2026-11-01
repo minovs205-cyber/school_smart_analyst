@@ -31,10 +31,23 @@ export interface AppSettings {
   preferredModel: string;
 }
 
-/** Прогресс по программе school_smart_analyst (квесты JavaRush-стиля). */
+/** Прогресс по практикам модулей программы. */
 export interface CurriculumProgress {
   completedQuestIds: string[];
   updatedAt: string;
+}
+
+/** Результат AI-диагностики (см. src/lib/diagnostic.ts). */
+export interface StoredDiagnosticResult {
+  answers: Record<string, string>;
+  skills: Array<{
+    id: string;
+    name: string;
+    score: number;
+    advice: string;
+  }>;
+  recommendedModuleIds: string[];
+  createdAt: string;
 }
 
 export const STORAGE_KEYS = {
@@ -47,6 +60,7 @@ export const STORAGE_KEYS = {
   groqApiKey: 'groq_api_key',
   settings: 'settings',
   curriculumProgress: 'curriculum_progress',
+  diagnosticResult: 'diagnostic_result',
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];

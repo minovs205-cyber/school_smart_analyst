@@ -1,13 +1,14 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { SkillsBoard } from '@/components/skills/SkillsBoard';
+import { AIDiagnosticWizard } from '@/components/diagnostic/AIDiagnosticWizard';
 
 const base = import.meta.env.BASE_URL;
+const autoStart = Astro.url.searchParams.get('start') === '1';
 ---
 
 <BaseLayout
-  title="Карта навыков"
-  description="Оценка навыков системного аналитика и устойчивость к автоматизации ИИ. Топ-3 зон роста — можно поделиться."
+  title="AI-диагностика"
+  description="Ситуационная AI-диагностика компетенций системного аналитика: неопределённость, валидация генерации, стейкхолдеры."
 >
-  <SkillsBoard client:load baseUrl={base} />
+  <AIDiagnosticWizard client:load baseUrl={base} autoStart={autoStart} />
 </BaseLayout>

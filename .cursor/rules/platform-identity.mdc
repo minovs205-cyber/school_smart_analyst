@@ -10,20 +10,21 @@ Also follow root `.cursorrules` (12-role team: PM, Architect, Dev, UX, QA, DevOp
 ## Platform
 
 - **Name / repo:** `school_smart_analyst`
-- **Product voice (RU):** «Антихрупкий аналитик»
+- **Product voice (RU):** «Антихрупкий системный аналитик»
 - **Live:** GitHub Pages static Astro app; progress in localStorage; mentor via OpenRouter
 - **Dual goal:** personal antifragility MVP + future public monetization ($0 infra)
 
 ## Mission
 
-Prepare a **junior systemic analyst** into a solid **middle+** who does **not fear AI** and works **hand-in-hand with AI** (critique, prompt craft, judgment) — especially in a **bank / regulated** context.
+Professional engineering platform for practicing SAs (Middle+/Senior): antifragility, delegate routine to AI, focus on architecture, business value, stakeholders — bank / regulated context.
 
-## Learning model (JavaRush-inspired)
+## Learning model
 
-- Modular quests with levels, XP-style progression, clear “today’s quest”
-- **AI is the mentor** on cases and drills — not a ghostwriter of full BRD/TZ
-- Core loop: **карта навыков → квест/кейс с наставником → журнал**
-- Prefer Russian UI copy; keep unavoidable domain terms (REST, KYC, ADR) glossed in RU when first used
+- **Modules of professional growth** (not gamified “quests/levels”)
+- **AI diagnostic** (situational) replaces slider self-scorecard
+- **AI is the mentor** on cases — junior engineer, not BRD ghostwriter
+- Core loop: **AI-диагностика → кейс с наставником → журнал инсайтов**
+- Tone: empowerment, engineering culture — avoid fear-based copy and JavaRush metaphors
 
 ## Non-goals
 

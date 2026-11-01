@@ -1,8 +1,8 @@
 # school_smart_analyst
 
-**Антихрупкий аналитик** — персональная платформа: из джуна в крепкого **middle+**, который не боится ИИ, а идёт с ним рука об руку (банк / регуляторика).
+**Антихрупкий системный аналитик** — инженерная платформа для практикующих SA: делегирование рутины ИИ, неопределённость, архитектура и стейкхолдеры (банк / регуляторика).
 
-Программа в стиле JavaRush: уровни → квесты → практика; **наставник — ИИ**. Описание: [`src/data/curriculum.ts`](src/data/curriculum.ts), UI: `/program`.
+Модули профессионального роста + **AI-диагностика**; наставник — ИИ. [`src/data/curriculum.ts`](src/data/curriculum.ts), UI: `/program`, `/scorecard`.
 
 **Бюджет: $0** — Astro (static) + GitHub Pages + [OpenRouter](https://openrouter.ai) free models + localStorage.
 

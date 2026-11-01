@@ -1,124 +1,104 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { GrowthModulesAccordion } from '@/components/home/GrowthModulesAccordion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { CURRICULUM_LEVELS, PLATFORM, getRecommendedQuest } from '@/data/curriculum';
+import { PLATFORM } from '@/data/curriculum';
 import { withBase } from '@/lib/paths';
 
 const base = import.meta.env.BASE_URL;
-const today = getRecommendedQuest([]);
-const todayHref = today.quest.href ? withBase(base, today.quest.href) : withBase(base, '/program');
 ---
 
 <BaseLayout title="Главная" description={PLATFORM.goal}>
-  <section class="space-y-10">
+  <section class="space-y-12">
     <div class="space-y-5">
       <div class="flex flex-wrap gap-2">
         <Badge class="border border-primary/40 bg-transparent text-primary uppercase tracking-wider">
           school_smart_analyst
         </Badge>
         <Badge class="border border-accent/50 bg-transparent text-accent uppercase tracking-wider">
-          Junior → middle+
+          Middle+ / Senior
         </Badge>
       </div>
 
       <h1 class="max-w-3xl text-4xl font-bold leading-tight tracking-tight md:text-5xl">
-        {PLATFORM.brandRu}: <span class="text-primary">с ИИ рука об руку</span>
+        Антихрупкий системный аналитик
       </h1>
 
       <p class="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-        {PLATFORM.tagline} Шесть уровней как у JavaRush: квесты, практика, кейсы. Наставник — ИИ, не
-        спичрайтер готового ТЗ.
+        Превратите генеративный ИИ в своего младшего помощника. Практическая платформа для аналитиков,
+        которые хотят делегировать рутину, работать с неопределённостью и фокусироваться на
+        архитектуре, а не на шаблонных ТЗ.
       </p>
 
       <div class="flex flex-wrap gap-2">
-        <Button asChild class="font-semibold">
-          <a href={withBase(base, '/program')}>Открыть программу</a>
+        <Button asChild size="lg" class="h-11 px-5 font-semibold">
+          <a href={withBase(base, '/scorecard')}>Начать AI-диагностику</a>
         </Button>
-        <Button asChild variant="outline" class="border-primary text-primary">
-          <a href={todayHref}>Квест на сегодня</a>
-        </Button>
-        <Button asChild variant="outline" class="border-accent text-accent">
-          <a href={withBase(base, '/consultations')}>Консультации</a>
+        <Button asChild size="lg" variant="outline" class="h-11 border-border px-5">
+          <a href={withBase(base, '/program')}>Изучить модули программы</a>
         </Button>
       </div>
     </div>
 
     <div class="space-y-4">
-      <h2 class="text-xl font-semibold tracking-tight md:text-2xl">Путь на сегодня</h2>
-      <Card class="border-primary/40 bg-card/80">
-        <CardHeader>
-          <Badge class="w-fit bg-primary text-primary-foreground">
-            Уровень {today.level.number} · {today.level.title}
-          </Badge>
-          <CardTitle class="text-base">{today.quest.title}</CardTitle>
-          <CardDescription>{today.quest.do}</CardDescription>
-        </CardHeader>
-        <CardContent class="flex flex-wrap gap-2">
-          <Button asChild class="font-semibold">
-            <a href={todayHref}>Начать квест</a>
-          </Button>
-          <Button asChild variant="outline">
-            <a href={withBase(base, '/program')}>Вся программа</a>
-          </Button>
-        </CardContent>
-      </Card>
-
+      <h2 class="text-xl font-semibold tracking-tight md:text-2xl">С чего начать</h2>
       <div class="grid gap-4 md:grid-cols-3">
-        <Card class="border-border bg-card/80">
+        <Card class="border-primary/40 bg-card/80">
           <CardHeader>
-            <Badge class="w-fit border-0 bg-accent/20 text-accent">Шаг A</Badge>
-            <CardTitle class="text-base">Карта навыков</CardTitle>
-            <CardDescription>Честная диагностика до любых квестов.</CardDescription>
+            <Badge class="w-fit bg-primary text-primary-foreground">1</Badge>
+            <CardTitle class="text-base">AI-диагностика</CardTitle>
+            <CardDescription>
+              5 минут, ситуационные вопросы, первичная оценка компетенций.
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild variant="outline" class="border-primary font-semibold text-primary">
-              <a href={withBase(base, '/scorecard')}>Открыть карту</a>
+            <Button asChild class="font-semibold">
+              <a href={withBase(base, '/scorecard')}>Пройти AI-диагностику (5 мин)</a>
             </Button>
           </CardContent>
         </Card>
 
         <Card class="border-border bg-card/80">
           <CardHeader>
-            <Badge class="w-fit border-0 bg-accent/20 text-accent">Шаг B</Badge>
-            <CardTitle class="text-base">Кейс + ИИ-наставник</CardTitle>
-            <CardDescription>Неудобные вопросы, без готового ТЗ.</CardDescription>
+            <Badge class="w-fit border-0 bg-accent/20 text-accent">2</Badge>
+            <CardTitle class="text-base">Кейс с ИИ-наставником</CardTitle>
+            <CardDescription>
+              Разбор реальной ситуации банка. Наставник уточняет — решение ваше.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild variant="outline" class="border-primary font-semibold text-primary">
-              <a href={withBase(base, '/cases')}>К кейсам</a>
+              <a href={withBase(base, '/cases')}>Разобрать реальный кейс с ИИ</a>
             </Button>
           </CardContent>
         </Card>
 
         <Card class="border-border bg-card/80">
           <CardHeader>
-            <Badge variant="secondary" class="w-fit">Шаг C</Badge>
-            <CardTitle class="text-base">Журнал недели</CardTitle>
-            <CardDescription>Урок, ошибка, роль ИИ — привычка middle+.</CardDescription>
+            <Badge variant="secondary" class="w-fit">3</Badge>
+            <CardTitle class="text-base">Журнал инсайтов</CardTitle>
+            <CardDescription>
+              Фиксация решений и роли ИИ в работе — привычка антихрупкого инженера.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild variant="outline">
-              <a href={withBase(base, '/journal')}>Записать неделю</a>
+              <a href={withBase(base, '/journal')}>Зафиксировать инсайт недели</a>
             </Button>
           </CardContent>
         </Card>
       </div>
     </div>
 
-    <div class="space-y-3">
-      <h2 class="text-lg font-semibold">6 уровней программы</h2>
-      <div class="flex flex-wrap gap-2 text-sm">
-        {CURRICULUM_LEVELS.map((level) => (
-          <a
-            class="rounded-full border border-border px-3 py-1 text-muted-foreground hover:border-primary hover:text-primary"
-            href={withBase(base, '/program')}
-          >
-            L{level.number}. {level.title}
-          </a>
-        ))}
-      </div>
-    </div>
+    <GrowthModulesAccordion client:load baseUrl={base} />
+
+    <p class="max-w-2xl text-sm text-muted-foreground">
+      Нужен разбор 1:1 по карьере или кейсу?
+      <a class="ml-1 text-primary underline-offset-4 hover:underline" href={withBase(base, '/consultations')}>
+        Консультации
+      </a>
+    </p>
   </section>
 </BaseLayout>

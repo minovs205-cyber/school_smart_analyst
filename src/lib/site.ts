@@ -4,7 +4,7 @@ import { withBase } from '@/lib/paths';
 export const SITE_ORIGIN = 'https://minovs205-cyber.github.io';
 
 export const SITE_NAME = 'school_smart_analyst';
-export const BRAND_RU = 'Антихрупкий аналитик';
+export const BRAND_RU = 'Антихрупкий системный аналитик';
 
 /**
  * Абсолютный URL страницы с учётом Astro `base`.
